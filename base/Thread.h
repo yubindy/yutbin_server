@@ -1,7 +1,7 @@
 #ifndef THREAD_H
 #define THREAD_H
 #include "nocopy.h"
-#include "atomic.h"
+#include <atomic>
 #include <cassert>
 #include <functional>
 #include <future>
