@@ -93,7 +93,8 @@
         "limits.h": "c",
         "libgen.h": "c",
         "codecvt": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "cassert": "cpp"
     },
     "code-runner.executorMap": {
         "javascript": "node",

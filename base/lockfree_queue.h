@@ -1,6 +1,6 @@
 #ifndef LOCKFREE_QUEUE.H
 #define LOCKFREE_QUEUE .H
-#include <atomic>
+#include <atomic.h>
 #include <memory>
 namespace yb
 {
@@ -33,15 +33,15 @@ namespace yb
             node *oldode = end.load();
             while (!(oldode->next).compare_exchange_weak(NULL, newd))
             {
-                while (oldode->next !=nullptr)   //避免占用tail挂掉，死循环
+                while (oldode->next != nullptr) //避免占用tail挂掉，死循环
                 {
                     oldode = oldode->next;
                 }
             }
-            end.compare_exchange_strong(oldode,newd);//释tail占用   
+            end.compare_exchange_strong(oldode, newd); //释tail占用
             cnt.fetch_add(1);
         }
-        std::shared_ptr<T> pop()
+        T pop()
         {
             node *beg = front.load();
             if (beg->next == nullptr)
@@ -52,6 +52,7 @@ namespace yb
             cnt.fetch_add(-1);
             std::shared_ptr<T> val = beg->val;
             delete beg;
+            return *val;
         }
 
     private:
