@@ -1,14 +1,13 @@
 #ifndef NOCOPY_H
 #define NOCOPY_H
-namespace yb
+using namespace yb;
+class nocopy
 {
-    class nocopy
-    {
-    public:
-        nocopy(const nocopy &) = delete;
-        nocopy operator=(const nocopy &) = delete;
-        nocopy() = default;
-        ~nocopy() = default;
-    };
-}
+public:
+    nocopy(const nocopy &) = delete;
+    nocopy operator=(const nocopy &) = delete;
+    nocopy() = default;
+    ~nocopy() = default;
+};
+
 #endif

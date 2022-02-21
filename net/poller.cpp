@@ -1,6 +1,15 @@
-#include"poller.h"
+#include "poller.h"
 class channel;
-namespace yb
+using namespace yb;
+void poller::update()
+{
+    
+}
+void poller::poll()
+{
+
+}
+void poller::assertinloop()
 {
     
 }
