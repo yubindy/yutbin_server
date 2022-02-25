@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <boost/operators.hpp>
 //具体为微秒
-using namespace yb;
+namespace yb{
 class Timestamp : public boost::less_than_comparable1<Timestamp>
 {
 public:
@@ -46,5 +46,6 @@ inline Timestamp addTime(Timestamp t, double f)
 {
     time_t fk = static_cast<time_t>(f * Timestamp::ktime);
     return Timestamp(t.get() + fk);
+}
 }
 #endif;

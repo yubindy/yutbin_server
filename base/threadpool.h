@@ -9,7 +9,8 @@
 #include "Thread.h"
 #include "lockfree_queue.h"
 class lf_queue;
-using namespace yb;
+namespace yb
+{
     class threadpool
     {
     private:
@@ -55,4 +56,5 @@ using namespace yb;
         }
         ~threadpool() { start.store(false); }
     };
+}
 #endif

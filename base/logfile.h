@@ -7,7 +7,8 @@
 #include <ctime>
 #include "fileutil.h"
 #include "Timestamp.h"
-using namespace yb;
+namespace yb
+{
 class fileadd;  //日志写入类
 class logfile : nocopy
 {
@@ -68,8 +69,32 @@ void logfile::append(const char *log, int len)
         unlock_append(log, len);
     }
 }
-void LogFile::append_unlocked(const char* logline, int len)
+void logfile::unlock_append(const char *log, int len) 
 {
     file->append();
+    if(file->writes()>rollsize)
+    {
+        rollfile();
+    }
+    else
+    {
+    ++count;
+    if(count>checkevery)
+    {
+        count=0;
+        time_t now=time(NULL);
+        time_t thisday=now - (now % daylight);
+        if(thisday!=lastday)
+        {
+            rollfile();
+        }
+        else if(now-lastflush>flushtime)
+        {
+            lastflush=now;
+            flush();
+        }
+    }
+    }
+}
 }
 #endif
