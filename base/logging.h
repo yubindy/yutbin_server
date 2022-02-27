@@ -9,7 +9,7 @@ const char *strerror_mr();
 class Timezone;
 namespace yb
 {
-
+    logstream &endl(logstream &stream);
     class logger
     {
     public:
@@ -55,12 +55,11 @@ namespace yb
         typedef void (*FlushFunc)();
         static loglevel getlevel() { return level; }
         logstream &stream() { return streams; }
-        static void setLogLevel(loglevel level);
+        static void setLogLevel(loglevel level_);
         static void setOutput(OutputFunc);
         static void setFlush(FlushFunc);
         static void setTimeZone(const Timezone &tz);
         void formatTime();
-        void finish();
 
     private:
         Timestamp time;
@@ -76,7 +75,7 @@ namespace yb
 #define LOG(level)                        \
     if (yb::logger::getlevel() >= loglev) \
     yb::logger(__FILE__, __LINE__, __func__, (yb::logger::getlevel() == logger::loglevel::ERROR || logger::loglevel::FATAL ? errno : 0), level).stream()
-#define unglyTrace(Class)                                                \
+#define unglyTrace(Class)                                               \
     LOG(TRACE) << typeid(Class).name() << "::" << __func__ << yb::endl; \
     fprintf(stderr, "%s::%s\n", typeid(Class).name(), __func__);
 }

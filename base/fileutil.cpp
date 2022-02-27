@@ -19,14 +19,15 @@ size_t fileadd::append(const char *logline, size_t len)
 {
     int writes = 0, remain = len;
     int t = 0;
+    int err;
     while (writes != len)
     {
         t = write(logline + writes, remain);
         if (t != remain)
         {
-            if (ferror(file))
+            if (err=ferror(file))
             {
-                fprintf(stderr,"fileadd::append failed %s",strerror_mr());
+                fprintf(stderr,"fileadd::append failed %s",strerror_mr(err));
             }
         }
         writes += t;
