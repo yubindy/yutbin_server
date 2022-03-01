@@ -1,9 +1,10 @@
-#ifndef LOGSTREAM.H
-#define LOGSTREAM .H
+#ifndef LOGSTREAM_H
+#define LOGSTREAM_H
 #include <string.h>
-#include <string>
 #include <assert.h>
 #include "nocopy.h"
+#include <string>
+
 namespace yb
 {
     const int logsmallbuffer = 4000;
@@ -13,12 +14,26 @@ namespace yb
     {
     public:
         logbuffer() : len(0) {}
-        void addlen(size_t add) { len + add; }
+        void addlen(size_t add) { len += add; }
         size_t avail()
         {
             assert(size >= len);
             return size - len;
         };
+        const char *debugString(bool out_to_std = true)
+        {
+            if (!strchr(buf, '\0'))
+                buf[len] = '\0';
+            if (out_to_std)
+            {
+                fprintf(stderr, "buf:%s\nsize:%d\n", buf, len);
+            }
+            for (size_t i = 0; i < len; i++)
+            {
+                fprintf(stderr, "%d: %c %d\n", i, buf[i], buf[i]);
+            }
+            return buf;
+        }
         void setlen(size_t len_)
         {
             assert(len_ < size);
@@ -27,9 +42,9 @@ namespace yb
         }
         void append(const char *str, size_t len_)
         {
-            if (!len)
+            if (!len_)
                 return;
-            assert(len <= avail());
+            assert(len_ <= avail());
             memcpy(buf, str, len_);
             addlen(len_);
         }
@@ -43,7 +58,7 @@ namespace yb
         {
             if (!len)
                 return;
-            assert(len <= avail());
+            assert(len_ <= avail());
             memcpy(buf, str.c_str(), len_);
             addlen(len_);
         }

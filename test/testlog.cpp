@@ -1,8 +1,8 @@
-#include "../base/logfile.h"
-#include "../base/logging.h"
-
+#include "../base/asynclogging.h"
+#include"../base/logfile.h"
 #include <unistd.h>
-std::unique_ptr<yb::logfile> g_logFile;
+using namespace yb;
+std::unique_ptr<logfile> g_logFile;
 
 void outputFunc(const char* msg, int len)
 {
@@ -11,24 +11,22 @@ void outputFunc(const char* msg, int len)
 
 void flushFunc()
 {
-  g_logFile->flush(); 
+  g_logFile->flush();
 }
 
 int main(int argc, char* argv[])
 {
-  char name[256] = { 0 };
+   char name[256] = { 0 }; 
   strncpy(name, argv[0], sizeof name - 1);
-  g_logfile.reset(new yb::logfile(::basename(name), 200*1000));
-  
-  muduo::Logger::setOutput(outputFunc);
-  muduo::Logger::setFlush(flushFunc);
-
-  muduo::string line = "1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+  printf("%s",name);
+  g_logFile.reset(new logfile(::basename(name), 200*1000));
+  logger::setOutput(outputFunc);
+  logger::setFlush(flushFunc); 
+  std::string line = "1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 
   for (int i = 0; i < 10000; ++i)
-  { 
-    LOG_INFO << line << i;
-
+  {
+    LOG(logger::INFO)<<line<<endl;
     usleep(1000);
-  }
+  } 
 }

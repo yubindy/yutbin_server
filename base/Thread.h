@@ -28,7 +28,7 @@ namespace yb
         pid_t tid;
         threadfunc funt;
         std::string name;
-        std::promise pro;
+        std::promise<void> pro;
         static std::atomic<int> numthreads;
     };
     pid_t getid();

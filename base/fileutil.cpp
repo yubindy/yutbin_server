@@ -1,5 +1,5 @@
 #include "fileutil.h"
-#include"logging.cpp"
+#include"logging.h"
 //对文件操作的封装
 using namespace yb;
 fileadd::fileadd(std::string filename) : file(fopen(filename.c_str(), "ae")), writed(0)

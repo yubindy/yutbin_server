@@ -1,5 +1,5 @@
-#ifndef TIMESTAMP.H
-#define TIMESTAMP.H
+#ifndef TIMESTAMP_H
+#define TIMESTAMP_H
 #include "nocopy.h"
 #include <sys/time.h>  
 #include <unistd.h>
@@ -48,4 +48,4 @@ inline Timestamp addTime(Timestamp t, double f)
     return Timestamp(t.get() + fk);
 }
 }
-#endif;
+#endif

@@ -1,11 +1,12 @@
-#ifndef LOGGING.H
-#define LOGGING .H
+#ifndef LOGGING_H
+#define LOGGING_H
 #include <stdio.h>
 #include "logstream.h"
 #include "Timestamp.h"
 #include <typeinfo>
 #include "Timezone.h"
-const char *strerror_mr();
+#include <functional>
+const char *strerror_mr( int err);
 class Timezone;
 namespace yb
 {
@@ -51,8 +52,8 @@ namespace yb
         };
         logger(sourcefile file_, int line_, const char *func_, int logerrno, loglevel level_ = INFO);
         ~logger();
-        typedef void (*OutputFunc)(const char *msg, int len);
-        typedef void (*FlushFunc)();
+        using FlushFunc = std::function<void()>;
+        using OutputFunc = std::function<void(const char *msg, int len)>;
         static loglevel getlevel() { return level; }
         logstream &stream() { return streams; }
         static void setLogLevel(loglevel level_);

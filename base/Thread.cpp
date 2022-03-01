@@ -41,7 +41,7 @@ namespace yb
     }
     void Thread::starts()
     {
-        threadData *data = new threadData(funt, name, pro, tid);
+        threadData *data = new threadData(std::move(funt), std::move(name), pro,tid);
         std::future<void> s = pro.get_future();
         if (pthread_create(thd, nullptr, runthread, static_cast<void *>(data)))
         {

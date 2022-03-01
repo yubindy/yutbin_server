@@ -1,3 +1,5 @@
+#ifndef FILEUTIL_H
+#define FILEUTIL_H
 #include <fcntl.h>
 #include <string.h>
 #include<string>
@@ -22,3 +24,4 @@ namespace yb
         char buf[64 * 1024];
     };
 }
+#endif
