@@ -1,5 +1,5 @@
-#ifndef POLLER.H
-#define POLLER .H
+#ifndef POLLER_H
+#define POLLER_iH
 #include <sys/epoll.h>
 #include "channel.h"
 #include "../base/nocopy.h"
@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <vector>
 class channel;
+class Eventloop;
 namespace yb
 {
     class poller : nocopy

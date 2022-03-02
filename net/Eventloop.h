@@ -1,7 +1,13 @@
+#ifndef EVENTLOOP_h
+#define EVENTLOOP_h
 #include <vector>
 namespace yb
 {
-    class Eventloop
+    namespace net
     {
+        class Eventloop
+        {
+        };
     }
 }
+#endif

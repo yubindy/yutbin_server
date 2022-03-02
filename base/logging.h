@@ -72,7 +72,7 @@ namespace yb
         static loglevel level;
     };
     extern logger::loglevel loglev;
-
+using lev=logger::loglevel;
 #define LOG(level)                        \
     if (yb::logger::getlevel() >= loglev) \
     yb::logger(__FILE__, __LINE__, __func__, (yb::logger::getlevel() == logger::loglevel::ERROR || logger::loglevel::FATAL ? errno : 0), level).stream()

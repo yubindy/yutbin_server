@@ -1,11 +1,34 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 #include <sys/socket.h>
-#include"../base/nocopy.h"
+#include "../base/nocopy.h"
 namespace yb
 {
     namespace net
     {
+        class InetAddress;
+
+        class Socket : nocopy
+        {
+        public:
+            explicit Socket(int sockfd) : sockfd_(sockfd) {}
+            ~Socket() { sock::close(sockfd_); }
+            int fd() const { return sockfd_; }
+            // bool getTcpINFO_(struct tcp_info *) const;
+            // bool getTcpInfoString(char *buf, int len) const;
+            void bindAddress(const InetAddress &localaddr);
+            void listen();
+            int accept(InetAddress *peeraddr);
+            void shutdownWrite();
+            void shutdownRead();
+            void setTcpNoDelay(bool on);
+            void setReuseAddr(bool on);
+            void setReusePort(bool on);
+            void setKeepAlive(bool on);
+
+        private:
+            const int sockfd_;
+        };
         int createNonblockingOrDie(sa_family_t family);
         int connect(int sockfd, const struct sockaddr *addr);
         void bindOrDie(int sockfd, const struct sockaddr *addr);
@@ -40,27 +63,5 @@ namespace yb
         bool isSelfConnect(int sockfd);
 
     } // namespace sock
-    class InetAddress;
-
-    class Socket : nocopy
-    {
-    public:
-        explicit Socket(int sockfd) : sockfd_(sockfd) {}
-        ~Socket() { sock::close(sockfd_); }
-        int fd() const { return sockfd_; }
-        // bool getTcpINFO_(struct tcp_info *) const;
-        // bool getTcpInfoString(char *buf, int len) const;
-        void bindAddress(const InetAddress &localaddr);
-        void listen();
-        int accept(InetAddress *peeraddr);
-        void shutdownWrite();
-        void shutdownRead();
-        void setTcpNoDelay(bool on);
-        void setReuseAddr(bool on);
-        void setReusePort(bool on);
-        void setKeepAlive(bool on);
-    private:
-        const int sockfd_;
-    };
 }
-#endif;
+#endif
