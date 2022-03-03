@@ -6,8 +6,9 @@
 #include <typeinfo>
 #include "Timezone.h"
 #include <functional>
-const char *strerror_mr( int err);
+const char *strerror_mr(int err);
 class Timezone;
+
 namespace yb
 {
     logstream &endl(logstream &stream);
@@ -55,14 +56,12 @@ namespace yb
         using FlushFunc = std::function<void()>;
         using OutputFunc = std::function<void(const char *msg, int len)>;
         static loglevel getlevel() { return level; }
-        logstream &stream() { return streams; }
+        logstream &getstream() { return streams; }
         static void setLogLevel(loglevel level_);
         static void setOutput(OutputFunc);
         static void setFlush(FlushFunc);
         static void setTimeZone(const Timezone &tz);
         void formatTime();
-
-    private:
         Timestamp time;
         sourcefile basename;
         size_t line;
@@ -72,12 +71,13 @@ namespace yb
         static loglevel level;
     };
     extern logger::loglevel loglev;
-using lev=logger::loglevel;
-#define LOG(level)                        \
-    if (yb::logger::getlevel() >= loglev) \
-    yb::logger(__FILE__, __LINE__, __func__, (yb::logger::getlevel() == logger::loglevel::ERROR || logger::loglevel::FATAL ? errno : 0), level).stream()
-#define unglyTrace(Class)                                               \
-    LOG(TRACE) << typeid(Class).name() << "::" << __func__ << yb::endl; \
-    fprintf(stderr, "%s::%s\n", typeid(Class).name(), __func__);
+    using lev = logger::loglevel;
+#define Showerr(err,str)  \
+    if (err)   \
+        fprintf(stderr, "[ERROR]: %s %s", str, strerror(errno));
+#define LOG(level)       \
+    if (level >= loglev) \
+        yb::logger(__FILE__, __LINE__, __func__, (level == logger::loglevel::ERROR || logger::loglevel::FATAL) ? errno : 0, level).streams
+
 }
 #endif

@@ -35,6 +35,7 @@ logger::logger(sourcefile file_, int line_, const char *func_, int logerrno, log
 {
     setLogLevel(level_);
     formatTime();
+    Showerr(errno,func);
     streams << (tid ? tid : (tid = getid())) << " " << LogLevelStr[level] << " ";
     streams << strerror_mr(errnos) << yb::endl;
 }

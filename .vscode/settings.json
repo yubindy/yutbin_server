@@ -94,7 +94,8 @@
         "libgen.h": "c",
         "codecvt": "cpp",
         "source_location": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "typeindex": "cpp"
     },
     "code-runner.executorMap": {
         "javascript": "node",

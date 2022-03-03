@@ -3,6 +3,8 @@
 #include <functional>
 #include<nocopy.h>
 #include<memory>
+#include<vector>
+#include"Eventloop.h"
 namespace yb
 {
     namespace net
@@ -18,8 +20,8 @@ namespace yb
             Eventloop *loop;
             int fd;
             readback rb;
-    
         };
+        using channelist=std::vector<channel>;
     }
 }
 #endif
