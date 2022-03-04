@@ -22,8 +22,8 @@ namespace yb
             typedef std::vector<struct epoll_event> eventlist;
             poller(Eventloop *loop_);
             ~poller();
-            void updatechannel();
-            void removechannel();
+            void updatechannel(channel* channel_);
+            void removechannel(channel* channel_);
             Timestamp poll(int timeoutMs, channelist *activeChannels);
             void assertinloop();
         private:
@@ -31,7 +31,8 @@ namespace yb
 
             void fillActiveChannels(int numEvents,
                                     channelist *activeChannels) const;
-            void update(int operation, channel *channel);
+            void update(int operation, channel *channel_);
+            channelmap channels;
             int epfd;
             Eventloop *loop;
             eventlist list;
