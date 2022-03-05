@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include "../base/nocopy.h"
+#include "InetAddress.h"
 namespace yb
 {
     namespace net

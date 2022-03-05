@@ -2,7 +2,7 @@
 #define POLLER_iH
 #include <sys/epoll.h>
 #include "../base/logging.h"
-#include "channel.h"
+#include "Channel.h"
 #include "../base/nocopy.h"
 #include "Eventloop.h"
 #include <unordered_map>
@@ -18,12 +18,13 @@ namespace yb
         {
         public:
             static const int initnum = 36;
-            typedef std::unordered_map<int, channel *> channelmap; // fd->channel 映射
+            using channelist = std::vector<Channel *>;
+            typedef std::unordered_map<int, Channel *> channelmap; // fd->channel 映射
             typedef std::vector<struct epoll_event> eventlist;
             poller(Eventloop *loop_);
             ~poller();
-            void updatechannel(channel* channel_);
-            void removechannel(channel* channel_);
+            void updatechannel(Channel* channel_);
+            void removechannel(Channel* channel_);
             Timestamp poll(int timeoutMs, channelist *activeChannels);
             void assertinloop();
         private:

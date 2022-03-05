@@ -34,7 +34,7 @@ Timestamp poller::poll(int timeoutMs, channelist *activeChannels)
     }
     return now;
 }
-void poller::updatechannel(channel *channel_)
+void poller::updatechannel(Channel *channel_)
 {
     poller::assertinloop();
     int status = channel_->getstatus();
@@ -68,7 +68,7 @@ void poller::updatechannel(channel *channel_)
     }
     return;
 }
-void poller::removechannel(channel *channel_)
+void poller::removechannel(Channel *channel_)
 {
     poller::assertinloop();
     int fd = channel_->getfd();
@@ -81,7 +81,7 @@ void poller::removechannel(channel *channel_)
         update(EPOLL_CTL_DEL, channel_); //如果在监听中删除
     }
 }
-void poller::update(int operation, channel *channel_)
+void poller::update(int operation, Channel *channel_)
 {
     struct epoll_event event;
     explicit_bzero(&event, sizeof(event));
@@ -105,7 +105,7 @@ void poller::fillActiveChannels(int numEvents,
 {
     for(int i=0;i<numEvents;i++)
     {
-        channel* t=static_cast<channel*>(list[i].data.ptr);
+        Channel* t=static_cast<Channel*>(list[i].data.ptr);
         int fd=t->getfd();
         t->setevent(list[i].events);
         activeChannels->push_back(t);
