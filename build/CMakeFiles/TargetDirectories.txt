@@ -1,3 +1,0 @@
-/home/zhaozeyu/Desktop/study/yutbin_server/build/CMakeFiles/yutbin_server.dir
-/home/zhaozeyu/Desktop/study/yutbin_server/build/CMakeFiles/edit_cache.dir
-/home/zhaozeyu/Desktop/study/yutbin_server/build/CMakeFiles/rebuild_cache.dir

@@ -2,7 +2,7 @@
 #define SOCKET_H
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "../base/nocopy.h"
+#include "nocopy.h"
 #include "InetAddress.h"
 namespace yb
 {

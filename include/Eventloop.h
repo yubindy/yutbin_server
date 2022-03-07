@@ -7,13 +7,13 @@
 #include "poll.h"
 #include "Channel.h"
 #include "Timestamp.h"
-#include"./poller.h"
+#include "poller.h"
 #include <mutex>
-#include"../base/logging.h"
-#include"../base/Threadtid.h"
-#include <../base/nocopy.h>
+#include "logging.h"
+#include "Threadtid.h"
+#include "nocopy.h"
 #include <sys/eventfd.h>
-#include"./Tcpconnection.h"
+#include "Tcpconnection.h"
 namespace yb
 {
     namespace net
@@ -43,7 +43,7 @@ namespace yb
             void addConnectInLoop(std::shared_ptr<Tcpconnection> con);
             void rmConnectInLoop(std::shared_ptr<Tcpconnection> con);
             void assertInLoopThread();
-            bool isInLoopThread() const { return threadid ==  gettid();}
+            bool isInLoopThread() const { return threadid == gettid(); }
 
         private:
             void handleRead();        //用于 读取Wakeupfd 为了唤醒所发送的内容

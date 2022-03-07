@@ -1,6 +1,6 @@
 #ifndef CALLBACK_H
 #define CALLBACK_H
-#include "../base/Timestamp.h"
+#include "Timestamp.h"
 #include <functional>
 #include <memory>
 namespace yb

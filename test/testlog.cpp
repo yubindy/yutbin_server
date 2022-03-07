@@ -1,4 +1,4 @@
-#include"../base/logging.h"
+#include"logging.h"
 #include <cmath>
 using namespace yb;
 int main(int argc, char const *argv[])
