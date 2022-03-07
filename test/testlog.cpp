@@ -1,4 +1,3 @@
-#include "../base/logstream.h"
 #include"../base/logging.h"
 #include <cmath>
 using namespace yb;
@@ -20,3 +19,16 @@ int main(int argc, char const *argv[])
   b.debugString();
   return 0;
 }
+//     void threadFunc();
+//     std::thread td_;
+//     mutable std::mutex m_;
+//     std::condition_variable cv_;
+//     std::promise<void> p_;
+//     std::atomic<bool> running_;
+//     size_t roll_size_;
+//     const size_t flushInterval_;
+//     size_t writeInterval_;
+//     bufptr cur_;
+//     bufptr prv_;
+//     bufvector transBufVec_;
+//     std::string logFileName_;

@@ -8,12 +8,12 @@
 #include <unordered_map>
 #include <vector>
 #include "../base/Timestamp.h"
-class channel;
-class Eventloop;
 namespace yb
 {
     namespace net
     {
+        class channel;
+        class Eventloop;
         class poller : nocopy //只支持epoll
         {
         public:
@@ -23,10 +23,12 @@ namespace yb
             typedef std::vector<struct epoll_event> eventlist;
             poller(Eventloop *loop_);
             ~poller();
-            void updatechannel(Channel* channel_);
-            void removechannel(Channel* channel_);
+            void updatechannel(Channel *channel_);
+            void removechannel(Channel *channel_);
+            bool haschannel(Channel *channel);
             Timestamp poll(int timeoutMs, channelist *activeChannels);
             void assertinloop();
+
         private:
             static const char *operationToString(int op);
 

@@ -6,7 +6,6 @@
 #include <vector>
 #include <atomic>
 #include <future>
-#include "Thread.h"
 namespace yb
 {
   class AsyncLogging : nocopy

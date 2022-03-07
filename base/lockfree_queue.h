@@ -1,6 +1,6 @@
 #ifndef LOCKFREE_QUEUE.H
 #define LOCKFREE_QUEUE .H
-#include <atomic.h>
+#include <atomic>
 #include <memory>
 namespace yb
 {

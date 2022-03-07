@@ -1,10 +1,10 @@
 #ifndef LOGSTREAM_H
 #define LOGSTREAM_H
 #include <string.h>
-#include <assert.h>
+#include<assert.h> 
 #include "nocopy.h"
-#include <string>
-
+#include<stdio.h>
+#include<string>
 namespace yb
 {
     const int logsmallbuffer = 4000;

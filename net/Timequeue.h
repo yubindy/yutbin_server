@@ -5,15 +5,15 @@
 #include "../base/nocopy.h"
 #include <vector>
 #include <set>
-#include"Timer.h"
+#include "Timer.h"
 #include <channel.h>
-class Eventloop;
-class channel;
-class Timer;
 namespace yb
 {
+    class Timer;
     namespace net
     {
+        class Eventloop;
+        class channel;
         class Timequeue : nocopy
         {
         public:

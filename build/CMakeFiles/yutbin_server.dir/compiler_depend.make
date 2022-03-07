@@ -436,7 +436,8 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/asyc
   /usr/include/stdc-predef.h \
   /home/zhaozeyu/Desktop/study/yutbin_server/base/asynclogging.h \
   /home/zhaozeyu/Desktop/study/yutbin_server/base/logging.h \
-  /usr/include/stdio.h \
+  /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h \
+  /usr/include/string.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
@@ -447,6 +448,12 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/asyc
   /usr/include/gnu/stubs.h \
   /usr/include/gnu/stubs-64.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/strings.h \
+  /usr/include/assert.h \
+  /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
+  /usr/include/stdio.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdarg.h \
   /usr/include/bits/types.h \
   /usr/include/bits/typesizes.h \
@@ -461,13 +468,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/asyc
   /usr/include/bits/stdio_lim.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/floatn-common.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h \
-  /usr/include/string.h \
-  /usr/include/bits/types/locale_t.h \
-  /usr/include/bits/types/__locale_t.h \
-  /usr/include/strings.h \
-  /usr/include/assert.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
   /usr/include/c++/11.2.0/string \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++config.h \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -634,7 +634,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/asyc
   /usr/include/boost/detail/workaround.hpp \
   /usr/include/boost/config/workaround.hpp \
   /usr/include/boost/core/addressof.hpp \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/Timezone.h \
   /usr/include/c++/11.2.0/functional \
   /usr/include/c++/11.2.0/tuple \
   /usr/include/c++/11.2.0/utility \
@@ -931,7 +930,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/file
   /usr/include/boost/detail/workaround.hpp \
   /usr/include/boost/config/workaround.hpp \
   /usr/include/boost/core/addressof.hpp \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/Timezone.h \
   /usr/include/c++/11.2.0/functional \
   /usr/include/c++/11.2.0/tuple \
   /usr/include/c++/11.2.0/utility \
@@ -1204,7 +1202,8 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logf
 CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logging.o: /home/zhaozeyu/Desktop/study/yutbin_server/base/logging.cpp \
   /usr/include/stdc-predef.h \
   /home/zhaozeyu/Desktop/study/yutbin_server/base/logging.h \
-  /usr/include/stdio.h \
+  /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h \
+  /usr/include/string.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
@@ -1215,6 +1214,12 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logg
   /usr/include/gnu/stubs.h \
   /usr/include/gnu/stubs-64.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/strings.h \
+  /usr/include/assert.h \
+  /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
+  /usr/include/stdio.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdarg.h \
   /usr/include/bits/types.h \
   /usr/include/bits/typesizes.h \
@@ -1229,13 +1234,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logg
   /usr/include/bits/stdio_lim.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/floatn-common.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h \
-  /usr/include/string.h \
-  /usr/include/bits/types/locale_t.h \
-  /usr/include/bits/types/__locale_t.h \
-  /usr/include/strings.h \
-  /usr/include/assert.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
   /usr/include/c++/11.2.0/string \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++config.h \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -1402,7 +1400,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logg
   /usr/include/boost/detail/workaround.hpp \
   /usr/include/boost/config/workaround.hpp \
   /usr/include/boost/core/addressof.hpp \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/Timezone.h \
   /usr/include/c++/11.2.0/functional \
   /usr/include/c++/11.2.0/tuple \
   /usr/include/c++/11.2.0/utility \
@@ -1477,6 +1474,21 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logs
   /usr/include/strings.h \
   /usr/include/assert.h \
   /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
+  /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdarg.h \
+  /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h \
+  /usr/include/bits/time64.h \
+  /usr/include/bits/types/__fpos_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/struct_FILE.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
+  /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/floatn.h \
+  /usr/include/bits/floatn-common.h \
   /usr/include/c++/11.2.0/string \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++config.h \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -1505,21 +1517,12 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logs
   /usr/include/c++/11.2.0/bits/postypes.h \
   /usr/include/c++/11.2.0/cwchar \
   /usr/include/wchar.h \
-  /usr/include/bits/floatn.h \
-  /usr/include/bits/floatn-common.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdarg.h \
   /usr/include/bits/wchar.h \
   /usr/include/bits/types/wint_t.h \
   /usr/include/bits/types/mbstate_t.h \
-  /usr/include/bits/types/__mbstate_t.h \
-  /usr/include/bits/types/__FILE.h \
-  /usr/include/bits/types/FILE.h \
   /usr/include/c++/11.2.0/cstdint \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdint.h \
   /usr/include/stdint.h \
-  /usr/include/bits/types.h \
-  /usr/include/bits/typesizes.h \
-  /usr/include/bits/time64.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-uintn.h \
   /usr/include/c++/11.2.0/bits/allocator.h \
@@ -1598,12 +1601,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logs
   /usr/include/bits/stdlib-float.h \
   /usr/include/c++/11.2.0/bits/std_abs.h \
   /usr/include/c++/11.2.0/cstdio \
-  /usr/include/stdio.h \
-  /usr/include/bits/types/__fpos_t.h \
-  /usr/include/bits/types/__fpos64_t.h \
-  /usr/include/bits/types/struct_FILE.h \
-  /usr/include/bits/types/cookie_io_functions_t.h \
-  /usr/include/bits/stdio_lim.h \
   /usr/include/c++/11.2.0/cerrno \
   /usr/include/errno.h \
   /usr/include/bits/errno.h \
@@ -1617,9 +1614,9 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/base/logs
 
 CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/testlog.o: /home/zhaozeyu/Desktop/study/yutbin_server/test/testlog.cpp \
   /usr/include/stdc-predef.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/asynclogging.h \
   /home/zhaozeyu/Desktop/study/yutbin_server/base/logging.h \
-  /usr/include/stdio.h \
+  /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h \
+  /usr/include/string.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
@@ -1630,6 +1627,12 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
   /usr/include/gnu/stubs.h \
   /usr/include/gnu/stubs-64.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/strings.h \
+  /usr/include/assert.h \
+  /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
+  /usr/include/stdio.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdarg.h \
   /usr/include/bits/types.h \
   /usr/include/bits/typesizes.h \
@@ -1644,13 +1647,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
   /usr/include/bits/stdio_lim.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/floatn-common.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h \
-  /usr/include/string.h \
-  /usr/include/bits/types/locale_t.h \
-  /usr/include/bits/types/__locale_t.h \
-  /usr/include/strings.h \
-  /usr/include/assert.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/nocopy.h \
   /usr/include/c++/11.2.0/string \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++config.h \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -1817,7 +1813,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
   /usr/include/boost/detail/workaround.hpp \
   /usr/include/boost/config/workaround.hpp \
   /usr/include/boost/core/addressof.hpp \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/Timezone.h \
   /usr/include/c++/11.2.0/functional \
   /usr/include/c++/11.2.0/tuple \
   /usr/include/c++/11.2.0/utility \
@@ -1844,53 +1839,74 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
   /usr/include/c++/11.2.0/bits/stl_heap.h \
   /usr/include/c++/11.2.0/bits/stl_tempbuf.h \
   /usr/include/c++/11.2.0/bits/uniform_int_dist.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/logfile.h \
-  /usr/include/c++/11.2.0/memory \
-  /usr/include/c++/11.2.0/bits/stl_raw_storage_iter.h \
-  /usr/include/c++/11.2.0/bits/align.h \
-  /usr/include/c++/11.2.0/bit \
-  /usr/include/c++/11.2.0/bits/unique_ptr.h \
-  /usr/include/c++/11.2.0/bits/shared_ptr.h \
-  /usr/include/c++/11.2.0/bits/shared_ptr_base.h \
-  /usr/include/c++/11.2.0/bits/allocated_ptr.h \
-  /usr/include/c++/11.2.0/ext/concurrence.h \
-  /usr/include/c++/11.2.0/bits/shared_ptr_atomic.h \
-  /usr/include/c++/11.2.0/bits/atomic_base.h \
-  /usr/include/c++/11.2.0/bits/atomic_lockfree_defines.h \
-  /usr/include/c++/11.2.0/backward/auto_ptr.h \
-  /usr/include/c++/11.2.0/pstl/glue_memory_defs.h \
-  /usr/include/c++/11.2.0/pstl/execution_defs.h \
-  /usr/include/c++/11.2.0/mutex \
-  /usr/include/c++/11.2.0/chrono \
-  /usr/include/c++/11.2.0/ratio \
+  /usr/include/c++/11.2.0/cmath \
+  /usr/include/math.h \
+  /usr/include/bits/math-vector.h \
+  /usr/include/bits/libm-simd-decl-stubs.h \
+  /usr/include/bits/flt-eval-method.h \
+  /usr/include/bits/fp-logb.h \
+  /usr/include/bits/fp-fast.h \
+  /usr/include/bits/mathcalls-helper-functions.h \
+  /usr/include/bits/mathcalls.h \
+  /usr/include/bits/mathcalls-narrow.h \
+  /usr/include/bits/iscanonical.h \
+  /usr/include/c++/11.2.0/bits/specfun.h \
   /usr/include/c++/11.2.0/limits \
-  /usr/include/c++/11.2.0/ctime \
-  /usr/include/c++/11.2.0/bits/parse_numbers.h \
-  /usr/include/c++/11.2.0/bits/std_mutex.h \
-  /usr/include/c++/11.2.0/bits/unique_lock.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/fileutil.h \
-  /usr/include/fcntl.h \
-  /usr/include/bits/fcntl.h \
-  /usr/include/bits/fcntl-linux.h \
-  /usr/include/bits/types/struct_iovec.h \
-  /usr/include/linux/falloc.h \
-  /usr/include/bits/stat.h \
-  /usr/include/bits/struct_stat.h \
-  /usr/include/c++/11.2.0/atomic \
-  /usr/include/c++/11.2.0/future \
-  /usr/include/c++/11.2.0/condition_variable \
-  /usr/include/c++/11.2.0/bits/atomic_futex.h \
-  /usr/include/c++/11.2.0/bits/std_thread.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/Thread.h \
-  /usr/include/c++/11.2.0/cassert \
-  /usr/include/c++/11.2.0/thread \
-  /usr/include/c++/11.2.0/bits/this_thread_sleep.h \
-  /usr/include/sys/syscall.h \
-  /usr/include/asm/unistd.h \
-  /usr/include/asm/unistd_64.h \
-  /usr/include/bits/syscall.h \
-  /home/zhaozeyu/Desktop/study/yutbin_server/base/logfile.h
+  /usr/include/c++/11.2.0/tr1/gamma.tcc \
+  /usr/include/c++/11.2.0/tr1/special_function_util.h \
+  /usr/include/c++/11.2.0/tr1/bessel_function.tcc \
+  /usr/include/c++/11.2.0/tr1/beta_function.tcc \
+  /usr/include/c++/11.2.0/tr1/ell_integral.tcc \
+  /usr/include/c++/11.2.0/tr1/exp_integral.tcc \
+  /usr/include/c++/11.2.0/tr1/hypergeometric.tcc \
+  /usr/include/c++/11.2.0/tr1/legendre_function.tcc \
+  /usr/include/c++/11.2.0/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/11.2.0/tr1/poly_hermite.tcc \
+  /usr/include/c++/11.2.0/tr1/poly_laguerre.tcc \
+  /usr/include/c++/11.2.0/tr1/riemann_zeta.tcc
 
+
+/usr/include/c++/11.2.0/tr1/riemann_zeta.tcc:
+
+/usr/include/c++/11.2.0/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/11.2.0/tr1/poly_hermite.tcc:
+
+/usr/include/c++/11.2.0/tr1/modified_bessel_func.tcc:
+
+/usr/include/c++/11.2.0/tr1/legendre_function.tcc:
+
+/usr/include/c++/11.2.0/tr1/hypergeometric.tcc:
+
+/usr/include/c++/11.2.0/tr1/exp_integral.tcc:
+
+/usr/include/c++/11.2.0/tr1/beta_function.tcc:
+
+/usr/include/c++/11.2.0/tr1/bessel_function.tcc:
+
+/usr/include/c++/11.2.0/tr1/special_function_util.h:
+
+/usr/include/c++/11.2.0/tr1/gamma.tcc:
+
+/usr/include/c++/11.2.0/bits/specfun.h:
+
+/usr/include/bits/mathcalls-narrow.h:
+
+/usr/include/bits/mathcalls.h:
+
+/usr/include/bits/mathcalls-helper-functions.h:
+
+/usr/include/bits/fp-logb.h:
+
+/usr/include/bits/flt-eval-method.h:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
+
+/usr/include/bits/math-vector.h:
+
+/usr/include/math.h:
+
+/usr/include/c++/11.2.0/cmath:
 
 /home/zhaozeyu/Desktop/study/yutbin_server/test/testlog.cpp:
 
@@ -1943,6 +1959,8 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
 /home/zhaozeyu/Desktop/study/yutbin_server/base/logstream.h:
 
 /home/zhaozeyu/Desktop/study/yutbin_server/base/logging.h:
+
+/usr/include/c++/11.2.0/tr1/ell_integral.tcc:
 
 /usr/include/c++/11.2.0/chrono:
 
@@ -2007,6 +2025,8 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
 /usr/include/c++/11.2.0/bits/hashtable_policy.h:
 
 /usr/include/c++/11.2.0/bits/stl_construct.h:
+
+/usr/include/bits/iscanonical.h:
 
 /usr/include/c++/11.2.0/bits/uniform_int_dist.h:
 
@@ -2342,8 +2362,6 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
 
 /usr/include/bits/types/__FILE.h:
 
-/home/zhaozeyu/Desktop/study/yutbin_server/base/Timezone.h:
-
 /usr/include/pthread.h:
 
 /usr/include/c++/11.2.0/bits/char_traits.h:
@@ -2457,6 +2475,8 @@ CMakeFiles/yutbin_server.dir/home/zhaozeyu/Desktop/study/yutbin_server/test/test
 /usr/include/c++/11.2.0/bits/stream_iterator.h:
 
 /usr/include/c++/11.2.0/bits/streambuf_iterator.h:
+
+/usr/include/bits/fp-fast.h:
 
 /usr/include/wctype.h:
 

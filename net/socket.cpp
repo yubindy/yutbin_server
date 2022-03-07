@@ -4,12 +4,63 @@
 #include <netinet/tcp.h>
 using namespace yb;
 using namespace yb::net;
+void Socket::bindAddress(const InetAddress &localaddr)
+{
+    bindOrDie(sockfd_, localaddr.getSockAddr());
+}
+void Socket::listen() { listenOrDie(sockfd_); }
+int Socket::accept(InetAddress *peeraddr)
+{
+    struct sockaddr_in addr;
+    explicit_bzero(&addr, sizeof addr);
+    int connfd = net::accept(sockfd_, &addr);
+    if (connfd >= 0)
+    {
+        peeraddr->setSockAddr(addr);
+    }
+    return connfd;
+}
+void Socket::shutdownWrite()
+{
+    ::shutdownWrite(sockfd_);
+}
+void Socket::shutdownRead()
+{
+    ::shutdownRead(sockfd_);
+}
+void Socket::setTcpNoDelay(bool on) // 禁用Nagle接口
+{
+    int opt = on ? 1 : 0;
+    setsockopt(sockfd_, IPPROTO_TCP, TCP_NODELAY, &opt, static_cast<socklen_t>(sizeof(opt)));
+}
+void Socket::setReuseAddr(bool on)
+{
+    int opt = on ? 1 : 0;
+    setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, &opt, static_cast<socklen_t>(sizeof(opt)));
+}
+void Socket::setReusePort(bool on)
+{
+    int optval = on ? 1 : 0;
+    int ret = ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEPORT, &optval,
+                           static_cast<socklen_t>(sizeof optval));
+}
+
+/* 发送心跳包 */
+/* 使用SO_KEEPALIVE套接字选项调用
+的getsockopt函数允许应用程序检索
+keepalive选项的当前状态。
+*/
+void Socket::setKeepAlive(bool on)
+{
+    int optval = on ? 1 : 0;
+    ::setsockopt(sockfd_, SOL_SOCKET, SO_KEEPALIVE, &optval,
+                 static_cast<socklen_t>(sizeof optval));
+}
 int createNonblockingOrDie(sa_family_t family)
 {
     int fd = socket(family, SOCK_CLOEXEC | SOCK_STREAM | SOCK_NONBLOCK, IPPROTO_TCP);
     if (fd < 0)
         LOG(lev::ERROR) << "sock::createNonblockingOrDie" << endl;
-    ;
     return fd;
 }
 int connect(int sockfd, const struct sockaddr *addr)
@@ -159,56 +210,4 @@ struct sockaddr_in getPeerAddr(int sockfd)
         LOG(lev::ERROR) << "sock::getPeerAddr";
     }
     return peeraddr;
-}
-void Socket::bindAddress(const InetAddress &localaddr)
-{
-    ::bindOrDie(sockfd_, localaddr.getsockaddr());
-}
-void Socket::listen() { listenOrDie(sockfd_); }
-int Socket::accept(InetAddress *peeraddr)
-{
-    struct sockaddr_in addr;
-    explicit_bzero(&addr, sizeof addr);
-    int connfd = ::accept(sockfd_, &addr);
-    if (connfd >= 0)
-    {
-        peeraddr->setSockAddr(addr);
-    }
-    return connfd;
-}
-void Socket::shutdownWrite()
-{
-    ::shutdownWrite(sockfd_);
-}
-void Socket::shutdownRead()
-{
-    ::shutdownRead(sockfd_);
-}
-void Socket::setTcpNoDelay(bool on) // 禁用Nagle接口
-{
-    int opt = on ? 1 : 0;
-    setsockopt(sockfd_, IPPROTO_TCP, TCP_NODELAY, &opt, static_cast<socklen_t>(sizeof(opt)));
-}
-void Socket::setReuseAddr(bool on)
-{
-    int opt = on ? 1 : 0;
-    setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, &opt, static_cast<socklen_t>(sizeof(opt)));
-}
-void Socket::setReusePort(bool on)
-{
-    int optval = on ? 1 : 0;
-    int ret = ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEPORT, &optval,
-                           static_cast<socklen_t>(sizeof optval));
-}
-
-/* 发送心跳包 */
-/* 使用SO_KEEPALIVE套接字选项调用
-的getsockopt函数允许应用程序检索
-keepalive选项的当前状态。
-*/
-void Socket::setKeepAlive(bool on)
-{
-    int optval = on ? 1 : 0;
-    ::setsockopt(sockfd_, SOL_SOCKET, SO_KEEPALIVE, &optval,
-                 static_cast<socklen_t>(sizeof optval));
 }

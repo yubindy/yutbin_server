@@ -21,6 +21,7 @@ namespace yb
         {
             using eventback = std::function<void()>;
             using channelist = std::vector<Channel *>;
+
         public:
             Channel(Eventloop *loop_, int fd_);
             ~Channel();
@@ -68,19 +69,20 @@ namespace yb
             bool isWriting() const { return events_ & kWriteEvent; }
             bool isReading() const { return events_ & kReadEvent; }
             bool noEvent() const { return events_ == kNoneEvent; }
-            int getfd() {return fd;}
-            int getstatus(){return status;}
-            void setstatus(int status) { }
+            int getfd() { return fd; }
+            int getstatus() { return status; }
+            void setstatus(int status) {}
             bool isNoneEvent();
-            int getevent() {return events_;}
-            void setevent(int opt) {recvevents_=opt;}
-            void tie(const std::shared_ptr<void>& pt);
+            int getevent() { return events_; }
+            void setevent(int opt) { recvevents_ = opt; }
+            void tie(const std::shared_ptr<void> &pt);
             void handleEvent(Timestamp recvtime);
             void handleEVentwithguard(Timestamp recvtime);
             std::string reventsToString();
+            void remove();
+
         private:
             void update();
-            void remove();
             Eventloop *loop;
             int events_;
             int recvevents_;

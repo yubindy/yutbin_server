@@ -10,8 +10,8 @@ class Timestamp : public boost::less_than_comparable1<Timestamp>
 {
 public:
     explicit Timestamp(time_t time_) : time(time_) {}
-    Timestamp();
-    ~Timestamp();
+    Timestamp():time(0){}
+    ~Timestamp()=default;
     std::string toString() const; 
     std::string toFormattedString(bool showtosecond) const;
     inline time_t get() const { return time; }
