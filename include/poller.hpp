@@ -14,8 +14,7 @@ namespace yb
     namespace net
     {
         class Channel;
-        class Eventloop;
-        
+        class Eventloop; 
         class poller : nocopy
         {
         public:

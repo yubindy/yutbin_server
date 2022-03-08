@@ -12,7 +12,7 @@
 #include "Threadtid.hpp"
 #include "nocopy.hpp"
 #include <sys/eventfd.h>
-#include "Tcpconnection.hpp"
+#include "TcpConnection.hpp"
 #include "Socket.hpp"
 namespace yb
 {
@@ -20,7 +20,7 @@ namespace yb
     {
 
         class Channel;
-        class Tcpconnection;
+        class TcpConnection;
         class Eventloop : nocopy, public std::enable_shared_from_this<Eventloop>
         {
         public:

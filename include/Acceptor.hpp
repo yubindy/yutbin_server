@@ -11,18 +11,19 @@ namespace yb
     {
         class Socket;
         class Channel;
-        class Acceptor :nocopy
+        using NewConnectionback = std::function<void(int sockfd, const InetAddress &address)>;
+        class Acceptor : nocopy
         {
         public:
-            using NewConnectionback = std::function<void(int sockfd, const InetAddress & address)>;
             Acceptor(Eventloop *loop, const InetAddress &listenaddr, bool reuseport);
             ~Acceptor();
             void setConnectback(const NewConnectionback &cb)
             {
-                NewConnection_=cb;
+                NewConnection_ = cb;
             }
             void listen();
-            bool listening() const { return listen_;}
+            bool listening() const { return listen_; }
+
         private:
             void handleRead();
             Eventloop *loop;

@@ -11,6 +11,7 @@ Tcpserver::Tcpserver(Eventloop *loop, const InetAddress address, const std::stri
 Tcpserver::~Tcpserver()
 {
     mainloop->assertInLoopThread();
+    nextConnId_ = 1;
     LOG(lev::INFO) << "yutbin server " << name << "quit" << endl;
     fprintf(stdout, "yutbin server %s quit", name);
     for (Connectmap::iterator &it : connects)
@@ -36,19 +37,30 @@ void Tcpserver::start()
 void Tcpserver::newConnection(int sockfd, const InetAddress &addr) // accept 回调
 {
     mainloop->assertInLoopThread();
-    Eventloop* ioloop=threadloop_->getNextloop();
+    Eventloop *ioloop = threadloop_->getNextloop();
     char buf[64];
-    InetAddress peerAddr(getLocalAddr(sockfd));
-    Tcpconptr conn(new Tcpconnection())
-
+    snprintf(buf, sizeof(buf), "-%s#%d", ipPort_.c_str(), nextConnId_);
+    ++nextConnId_;
+    std::string connName = name + buf;
+    LOG(lev::INFO) << "TcpServer::newConnection [" << name
+                   << "] - new connection [" << connName
+                   << "] from " << addr.toIpPort() << endl;
+    InetAddress peerAddr(getLocalAddr(sockfd)); //获取本地地址
+    Tcpconptr conn(new TcpConnection(mainloop, sockfd, connName, addr, peerAddr));
+    connects[connName] = connName;
+    conn->setConnectionback(connback);
+    conn->setMessageCallback(messback);
+    conn->setWriteCompleteCallback(writeback);
+    conn->setCloseCallback(std::bind(&TcpServer::removeConnection, this, _1));
+    ioloop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
 }
-void TcpServer::removeConnection(const TcpConnectionPtr& conn)
+void TcpServer::removeConnection(const TcpConnectionPtr &conn)
 {
-
-}
-void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
-{
+    Eventloop *subloop = conn->getloop();
     
+}
+void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn)
+{
 }
 // std::shared_ptr<Eventloop> mainloop;
 // const std::string ipport;

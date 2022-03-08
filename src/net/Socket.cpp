@@ -69,7 +69,7 @@ void Socket::setReusePort(bool on)
 的getsockopt函数允许应用程序检索
 keepalive选项的当前状态。
 */
-void Socket::setKeepAlive(bool on)
+void Socket::setKeepAlive(bool on=true)
 {
     int optval = on ? 1 : 0;
     ::setsockopt(sockfd_, SOL_SOCKET, SO_KEEPALIVE, &optval,
@@ -208,8 +208,8 @@ int net::getSocketError(int sockfd)
 struct sockaddr_in net::getLocalAddr(int sockfd)
 {
     struct sockaddr_in localaddr;
-    explicit_bzero(&localaddr, sizeof localaddr);
-    socklen_t addrlen = static_cast<socklen_t>(sizeof localaddr);
+    explicit_bzero(&localaddr, sizeof (localaddr));
+    socklen_t addrlen = static_cast<socklen_t>(sizeof(localaddr));
     struct sockaddr *socksaddr = static_cast<sockaddr *>(static_cast<void *>(&localaddr));
     if (::getsockname(sockfd, socksaddr, &addrlen) < 0)
     {

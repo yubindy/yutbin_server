@@ -2,7 +2,7 @@
 #define TCPSERVER_H
 #include "nocopy.hpp"
 #include "EventloopThread.hpp"
-#include "Tcpconnection.hpp"
+#include "TcpConnection.hpp"
 #include <memory>
 #include<map>
 #include <atomic>
@@ -48,6 +48,7 @@ namespace yb
             using Connectmap=std::map<std::string,Tcpconnection>;
             std::shared_ptr<Eventloop> mainloop;
             const std::string ipport;
+            int nextConnId_;
             const std::string name;
             std::unique_ptr<Acceptor> acceptor_;
             std::shared_ptr<EventloopThreadpool> threadpool_;

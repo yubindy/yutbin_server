@@ -11,8 +11,8 @@ namespace yb
     namespace net
     {
         class netbuffer;
-        class Tcpconnect;
-        using Tcpconptr = std::shared_ptr<Tcpconnect>;
+        class TcpConnection;
+        using Tcpconptr = std::shared_ptr<TcpConnection>;
         using Timercallback = std::function<void()>;
         using ConnectionCallback = std::function<void(const Tcpconptr &)>;
         using CloseCallback = std::function<void(const Tcpconptr &)>;

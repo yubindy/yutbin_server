@@ -4,6 +4,7 @@
 #include <vector>
 #include <assert.h>
 #include <string.h>
+#include "logging.hpp"
 namespace yb
 {
     namespace net
@@ -22,8 +23,9 @@ namespace yb
             }
             size_t readbyte() const { return writeindex_ - readindex_; }
             size_t writebyte() const { return buffer_.size() - writeindex_; }
-            const char *begin() { return &*buffer_.begin(); }
+            char *begin() { return &*buffer_.begin(); }
             bool checkmove() { return readindex_ != khead; }
+            char* peek() {return &buffer_[readindex_];}
             void Capity(int len)
             {
                 if (writebyte() < len)
@@ -57,9 +59,30 @@ namespace yb
                 }
             }
             void expends(int len)
-            {   
-                if(buffer_.size()<len)
-                buffer_.resize(len);
+            {
+                if (buffer_.size() < len)
+                    buffer_.resize(len);
+            }
+            void retrieve(size_t len)
+            {
+                assert(len <= readbyte());
+                if (len < readbyte())
+                {
+                    readindex_ += len;
+                }
+                else
+                {
+                    retrieveAll();
+                }
+            }
+            void retrieveAll()
+            {
+                readindex_ = khead;
+                writeindex_ = kinitsize;
+            } //读完
+            void debug()
+            {
+                LOG(lev::DEBUG) << "readindex" << readindex_ << "writeindex" << writeindex_ << "buffer" << &buffer_[0] << endl;
             }
             ssize_t readfd(int fd, int *err);
 

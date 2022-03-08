@@ -48,7 +48,7 @@ if(MSVC)
 	if(${variable} MATCHES "/MD")
 	  string(REGEX REPLACE "/MD" "/MT" ${variable} "${${variable}}")
 	endif()
-  endforeach()
+  endforeach()  
 endif()
 
 # If you want your own include/ directory, set this, and then you can do

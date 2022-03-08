@@ -1,5 +1,5 @@
 #include "poller.hpp"
-#include "assert.hpp"
+#include<cassert>
 using namespace yb;
 using namespace yb::net;
 
@@ -103,7 +103,7 @@ bool  poller::haschannel(Channel *channel)
 }
 void poller::assertinloop()
 {
-    loop->assertinloop();
+    loop->assertInLoopThread();
 }
 void poller::fillActiveChannels(int numEvents,
                         channelist *activeChannels) const

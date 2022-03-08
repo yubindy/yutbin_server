@@ -1,7 +1,7 @@
 #ifndef CHANNEL_H
 #define CHANNEL_H
 #include "Callback.hpp"
-#include "nocopy.hpp
+#include "nocopy.hpp"
 #include <memory>
 #include <vector>
 #include <functional>
@@ -20,26 +20,27 @@ namespace yb
         class Channel : nocopy
         {
             using eventback = std::function<void()>;
+            using readeventback=std::function<void(Timestamp)>;
             using channelist = std::vector<Channel *>;
 
         public:
             Channel(Eventloop *loop_, int fd_);
             ~Channel();
-            void setreadback(eventback t)
+            void setreadback(readeventback t)
             {
-                rb = std::move(t);
+                readCallback_ = std::move(t);
             }
-            void serwruteback(eventback t)
+            void serwriteback(eventback t)
             {
-                rb = std::move(t);
+                writeCallback_ = std::move(t);
             }
             void setcloseback(eventback t)
             {
-                rb = std::move(t);
+                closeCallback_ = std::move(t);
             }
             void seterrorback(eventback t)
             {
-                rb = std::move(t);
+                errorCallback_ = std::move(t);
             }
             void enableReading()
             {
@@ -87,7 +88,6 @@ namespace yb
             int events_;
             int recvevents_;
             const int fd;
-            eventback rb;
             int status;
             std::weak_ptr<void> tie_;
             bool tied_;
@@ -95,7 +95,7 @@ namespace yb
             static const int kReadEvent;
             static const int kWriteEvent;
 
-            eventback readCallback_;
+            readeventback readCallback_;
             eventback writeCallback_;
             eventback closeCallback_;
             eventback errorCallback_;
