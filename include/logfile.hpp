@@ -1,12 +1,12 @@
 #ifndef LOGFILE_H
 #define LOGFILE_H
-#include "nocopy.h"
+#include "nocopy.hpp"
 #include <memory>
 #include <mutex>
 #include <string>
 #include <ctime>
-#include "fileutil.h"
-#include "Timestamp.h"
+#include "fileutil.hpp"
+#include "Timestamp.hpp"
 namespace yb
 {
     class fileadd; //日志写入类

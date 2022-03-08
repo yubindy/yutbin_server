@@ -1,6 +1,6 @@
 #ifndef CALLBACK_H
 #define CALLBACK_H
-#include "Timestamp.h"
+#include "Timestamp.hpp"
 #include <functional>
 #include <memory>
 namespace yb
@@ -25,4 +25,4 @@ namespace yb
                                     Timestamp receiveTime);
     }
 }
-#endif;
+#endif

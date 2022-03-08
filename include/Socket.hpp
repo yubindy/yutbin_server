@@ -2,8 +2,8 @@
 #define SOCKET_H
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "nocopy.h"
-#include "InetAddress.h"
+#include "nocopy.hpp"
+#include "InetAddress.hpp"
 namespace yb
 {
     namespace net
@@ -34,6 +34,10 @@ namespace yb
             int fd() const { return sockfd_; }
             // bool getTcpINFO_(struct tcp_info *) const;
             // bool getTcpInfoString(char *buf, int len) const;
+            ssize_t read(int sockfd, void *buf, size_t count, off_t off);
+            ssize_t write(int sockfd, const void *buf, size_t count);
+            ssize_t readv(int sockfd, const struct iovec *iov, int iovcnt);
+            ssize_t sendfile(int sockfd, int in_fd, off_t *off, size_t count);
             void bindAddress(const InetAddress &localaddr);
             void listen();
             int accept(InetAddress *peeraddr);

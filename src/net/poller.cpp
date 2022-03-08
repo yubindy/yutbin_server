@@ -1,5 +1,5 @@
-#include "poller.h"
-#include "assert.h"
+#include "poller.hpp"
+#include "assert.hpp"
 using namespace yb;
 using namespace yb::net;
 
@@ -95,6 +95,11 @@ void poller::update(int operation, Channel *channel_)
                                                                           << (event.events & EPOLLIN ? "EPOLLIN" : " ")
                                                                           << (event.events & EPOLLOUT ? "EPOLLOUT" : " ") << endl;
     }
+}
+bool  poller::haschannel(Channel *channel)
+{   
+    channelmap::iterator it=channels.find(channel->getfd());
+    return it!=channels.end();
 }
 void poller::assertinloop()
 {

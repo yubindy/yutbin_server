@@ -1,6 +1,6 @@
-#include "logging.h"
-#include "Thread.h"
-#include"logstream.h"
+#include "logging.hpp"
+#include "Thread.hpp"
+#include"logstream.hpp"
 #include <errno.h>
 using namespace yb;
 logger::loglevel loglev=lev::TRACE;

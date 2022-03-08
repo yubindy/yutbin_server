@@ -1,0 +1,91 @@
+project(MyIM)
+
+cmake_minimum_required(VERSION 3.19)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(CMAKE_C_COMPILER "/usr/bin/clang")
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+SET(CMAKE_CXX_STANDARD 17)
+
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -g -pthread")
+SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O2  -Wall")
+# SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}  -Og -Wall -fsanitize=address -fno-omit-frame-pointer -g")
+SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}  -Og -g -pthread")
+SET(CMAKE_BUILE_TYPE "Debug")
+find_package(Protobuf REQUIRED)
+find_package(gRPC REQUIRED)
+
+
+# SET(PROTOS ${CMAKE_CURRENT_SOURCE_DIR}/NewIM.proto)
+# SET(GRPC_CPP_PLUGIN_PATH /usr/bin/grpc_cpp_plugin)
+
+
+# PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS NewIM.proto)
+# PROTOBUF_GENERATE_CPP(GRPC_SRCS GRPC_HDRS NewIM.proto PLUGIN protoc-gen-grpc=/usr/bin/grpc_cpp_plugin)
+# PROTOBUF_GENERATE_GRPC_CPP(GRPC_SRCS GRPC_HDRS NewIM.proto)
+
+
+include_directories(
+        # ${CMAKE_CURRENT_SOURCE_DIR}
+        # ${CMAKE_CURRENT_BINARY_DIR}
+        # ${CMAKE_CURRENT_BINARY_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        # ${PROTO_HDRS}
+        # ${GRPC_HDRS}
+)
+
+
+AUX_SOURCE_DIRECTORY(src/client client_list)
+AUX_SOURCE_DIRECTORY(src/server server_list)
+AUX_SOURCE_DIRECTORY(src/otp otp_list)
+AUX_SOURCE_DIRECTORY(src public_list)
+AUX_SOURCE_DIRECTORY(src/tools tools_src)
+
+
+add_executable(client.out ${client_list} ${public_list})
+add_executable(server.out ${server_list} ${public_list} ${otp_list})
+add_executable(totp.out ${tools_src} ${otp_list})
+
+message(STATUS "client:" ${client_list})
+message(STATUS "server:" ${server_list})
+message(STATUS "public:" ${public_list})
+message(STATUS "otp:" ${otp_list})
+
+set(Openssl ssl crypto)
+target_link_libraries(
+        client.out
+        ${Openssl}
+        ${PROTOBUF_LIBRARIES}
+        glog
+        re2
+        gRPC::grpc
+        gRPC::grpc++
+)
+target_link_libraries(
+        server.out
+        mysqlcppconn
+        ${Openssl}
+        ${PROTOBUF_LIBRARIES}
+        glog
+        gcrypt
+        gRPC::grpc
+        gRPC::grpc++
+
+)
+target_link_libraries(
+        totp.out
+        gcrypt
+        glog
+)
+
+# test
+# set(test_l ./test/sqltest.cpp)
+# add_executable(test.out ${test_l})
+# target_link_libraries(
+#     test.out
+#     ${Openssl}
+#     gcrypt
+#     pthread
+#
+# )

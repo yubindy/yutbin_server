@@ -1,6 +1,6 @@
 #ifndef THREAD_H
 #define THREAD_H
-#include "nocopy.h"
+#include "nocopy.hpp"
 #include <atomic>
 #include <cassert>
 #include <functional>

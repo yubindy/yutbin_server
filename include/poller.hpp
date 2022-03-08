@@ -1,20 +1,22 @@
 #ifndef POLLER_H
-#define POLLER_iH
+#define POLLER_H
 #include <sys/epoll.h>
-#include "logging.h"
-#include "Channel.h"
-#include "nocopy.h"
-#include "Eventloop.h"
+#include<sys/poll.h>
+#include "logging.hpp"
+#include "Channel.hpp"
+#include "nocopy.hpp"
+#include "Eventloop.hpp"
 #include <unordered_map>
 #include <vector>
-#include "Timestamp.h"
+#include "Timestamp.hpp"
 namespace yb
 {
     namespace net
     {
-        class channel;
+        class Channel;
         class Eventloop;
-        class poller : nocopy //只支持epoll
+        
+        class poller : nocopy
         {
         public:
             static const int initnum = 36;
@@ -34,7 +36,7 @@ namespace yb
 
             void fillActiveChannels(int numEvents,
                                     channelist *activeChannels) const;
-            void update(int operation, channel *channel_);
+            void update(int operation, Channel *channel_);
             channelmap channels;
             int epfd;
             Eventloop *loop;

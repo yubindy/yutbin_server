@@ -1,5 +1,5 @@
-#include "Channel.h"
-#include "poller.h"
+#include "Channel.hpp"
+#include "poller.hpp"
 #include<sstream>
 using namespace yb;
 using namespace yb::net;
@@ -44,7 +44,7 @@ void Channel::handleEvent(Timestamp recvtime)
 void Channel::handleEVentwithguard(Timestamp recvtime)
 {
     LOG(lev::TRACE) << reventsToString();
-    if ((recvevents_ & POLLHUP) && !(recvevents_ & POLLIN))
+    if ((recvevents_ & EPOLLHUP) && !(recvevents_ & EPOLLIN))
     {
         // if (logHup_)
         // {
@@ -59,17 +59,17 @@ void Channel::handleEVentwithguard(Timestamp recvtime)
         LOG(lev::WARN) << "fd = " << fd << " Channel::handle_event() POLLNVAL";
     }
 
-    if (recvevents_ & (POLLERR | POLLNVAL))
+    if (recvevents_ & (EPOLLERR | POLLNVAL))
     {
         if (errorCallback_)
             errorCallback_();
     }
-    if (recvevents_ & (POLLIN | POLLPRI | POLLRDHUP))
+    if (recvevents_ & (EPOLLIN | EPOLLPRI | EPOLLRDHUP))
     {
         if (readCallback_)
             readCallback_();
     }
-    if (recvevents_ & POLLOUT)
+    if (recvevents_ & EPOLLOUT)
     {
         if (writeCallback_)
             writeCallback_();
@@ -79,17 +79,17 @@ std::string Channel::reventsToString()
 {
     std::ostringstream os;
     os << fd << ":";
-    if (events_ & POLLIN)
+    if (events_ & EPOLLIN)
         os << "IN ";
-    if (events_ & POLLPRI)
+    if (events_ & EPOLLPRI)
         os << "PRI ";
-    if (events_ & POLLOUT)
+    if (events_ & EPOLLOUT)
         os << "OUT ";
-    if (events_ & POLLHUP)
+    if (events_ & EPOLLHUP)
         os << "HUP ";
-    if (events_ & POLLRDHUP)
+    if (events_ & EPOLLRDHUP)
         os << "RDHUP ";
-    if (events_ & POLLERR)
+    if (events_ & EPOLLERR)
         os << "ERR ";
     if (events_ & POLLNVAL)
         os << "NVAL ";

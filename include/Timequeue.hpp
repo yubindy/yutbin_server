@@ -1,12 +1,12 @@
 #ifndef TIMEQUEUE_H
 #define TIMEQUEUE_H
-#include "Timestamp.h"
-#include "Callback.h"
-#include "nocopy.h"
+#include "Timestamp.hpp"
+#include "Callback.hpp"
+#include "nocopy.hpp"
 #include <vector>
 #include <set>
-#include "Timer.h"
-#include "Channel.h"
+#include "Timer.hpp"
+#include "Channel.hpp"
 namespace yb
 {
     class Timer;

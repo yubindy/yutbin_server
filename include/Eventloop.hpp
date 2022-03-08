@@ -4,21 +4,21 @@
 #include <functional>
 #include <memory>
 #include <atomic>
-#include "poll.h"
-#include "Channel.h"
-#include "Timestamp.h"
-#include "poller.h"
+#include "Channel.hpp"
+#include "Timestamp.hpp"
+#include "poller.hpp"
 #include <mutex>
-#include "logging.h"
-#include "Threadtid.h"
-#include "nocopy.h"
+#include "logging.hpp"
+#include "Threadtid.hpp"
+#include "nocopy.hpp"
 #include <sys/eventfd.h>
-#include "Tcpconnection.h"
+#include "Tcpconnection.hpp"
+#include "Socket.hpp"
 namespace yb
 {
     namespace net
     {
-        class poller;
+
         class Channel;
         class Tcpconnection;
         class Eventloop : nocopy, public std::enable_shared_from_this<Eventloop>
@@ -37,11 +37,6 @@ namespace yb
             void updateChannel(Channel *channel);
             void removeChannel(Channel *channel);
             bool hasChannel(Channel *channel);
-
-            void addConnect(std::shared_ptr<Tcpconnection> con);
-            void rmConnect(std::shared_ptr<Tcpconnection> con);
-            void addConnectInLoop(std::shared_ptr<Tcpconnection> con);
-            void rmConnectInLoop(std::shared_ptr<Tcpconnection> con);
             void assertInLoopThread();
             bool isInLoopThread() const { return threadid == gettid(); }
 

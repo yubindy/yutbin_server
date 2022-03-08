@@ -1,8 +1,8 @@
 #ifndef ASYNCLOGGING_H
 #define ASYNCLOGGING_H
-#include "logging.h"
-#include "logfile.h"
-#include "nocopy.h"
+#include "logging.hpp"
+#include "logfile.hpp"
+#include "nocopy.hpp"
 #include <vector>
 #include <atomic>
 #include <future>

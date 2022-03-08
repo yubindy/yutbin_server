@@ -1,7 +1,7 @@
 #ifndef LOGGING_H
 #define LOGGING_H
-#include "logstream.h"
-#include "Timestamp.h"
+#include "logstream.hpp"
+#include "Timestamp.hpp"
 #include<functional>
 const char *strerror_mr(int err);
 class Timezone;

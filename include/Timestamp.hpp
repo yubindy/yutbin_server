@@ -1,6 +1,6 @@
 #ifndef TIMESTAMP_H
 #define TIMESTAMP_H
-#include "nocopy.h"
+#include "nocopy.hpp"
 #include <sys/time.h>  
 #include <unistd.h>
 #include <boost/operators.hpp>

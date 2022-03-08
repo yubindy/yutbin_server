@@ -6,8 +6,8 @@
 #include <vector>
 #include <condition_variable>
 #include <atomic>
-#include "Thread.h"
-#include "lockfree_queue.h"
+#include "Thread.hpp"
+#include "lockfree_queue.hpp"
 class lf_queue;
 namespace yb
 {

@@ -1,11 +1,11 @@
 #ifndef CHANNEL_H
 #define CHANNEL_H
-#include "Callback.h"
-#include <nocopy.h>
+#include "Callback.hpp"
+#include "nocopy.hpp
 #include <memory>
 #include <vector>
 #include <functional>
-#include "Eventloop.h"
+#include "Eventloop.hpp"
 namespace yb
 {
     namespace net

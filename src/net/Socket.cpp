@@ -1,5 +1,5 @@
-#include "socket.h"
-#include "../base/logging.h"
+#include "Socket.hpp"
+#include "logging.hpp"
 #include <arpa/inet.h>
 #include <netinet/tcp.h>
 using namespace yb;
@@ -20,6 +20,25 @@ int Socket::accept(InetAddress *peeraddr)
     }
     return connfd;
 }
+// ssize_t Socket::read(int sockfd, void *buf, size_t count, off_t off)
+// {
+//     return read(sockfd, buf, count, off);
+// }
+
+// ssize_t Socket::write(int sockfd, const void *buf, size_t count)
+// {
+//     return ::write(sockfd, buf, count);
+// }
+
+// ssize_t Socket::readv(int sockfd, const struct iovec *iov, int iovcnt)
+// {
+//     return readv(sockfd, iov, iovcnt);
+// }
+
+// ssize_t Socket::sendfile(int sockfd, int in_fd, off_t *off, size_t count)
+// {
+//     return sendfile(sockfd, in_fd, off, count);
+// }
 void Socket::shutdownWrite()
 {
     ::shutdownWrite(sockfd_);
@@ -137,7 +156,7 @@ void shutdownWrite(int sockfd)
         LOG(lev::ERROR) << "sock::shutdownWrite" << endl;
     }
 }
-void toIpPort(char *buf, size_t size, const struct sockaddr *addr)
+void net::toIpPort(char *buf, size_t size, const struct sockaddr *addr)
 {
     toIp(buf, size, addr);
     size_t end = ::strlen(buf);
@@ -146,7 +165,7 @@ void toIpPort(char *buf, size_t size, const struct sockaddr *addr)
     assert(size > end);
     snprintf(buf + end, size - end, ":%u", port);
 }
-void toPortString(char *buf, size_t size, const struct sockaddr *addr)
+void net::toPortString(char *buf, size_t size, const struct sockaddr *addr)
 {
     const struct sockaddr_in *addr4 = static_cast<sockaddr_in *>(static_cast<void *>(const_cast<sockaddr *>(addr)));
     size_t end = ::strlen(buf);
@@ -154,7 +173,7 @@ void toPortString(char *buf, size_t size, const struct sockaddr *addr)
     assert(size > end);
     snprintf(buf + end, size - end, "%u", port);
 }
-void toIp(char *buf, size_t size, const struct sockaddr *addr)
+void net::toIp(char *buf, size_t size, const struct sockaddr *addr)
 {
     if (addr->sa_family == AF_INET)
     {
@@ -163,7 +182,7 @@ void toIp(char *buf, size_t size, const struct sockaddr *addr)
         inet_ntop(AF_INET, &addr4->sin_addr, buf, static_cast<socklen_t>(size));
     }
 }
-void fromIpPort(const char *ip, uint16_t port, struct sockaddr_in *addr)
+void net::fromIpPort(const char *ip, uint16_t port, struct sockaddr_in *addr)
 {
     addr->sin_family = AF_INET;
     addr->sin_port = htons(port);
@@ -171,7 +190,7 @@ void fromIpPort(const char *ip, uint16_t port, struct sockaddr_in *addr)
     {
     }
 }
-int getSocketError(int sockfd)
+int net::getSocketError(int sockfd)
 {
     int optval;
     socklen_t optlen = static_cast<socklen_t>(sizeof optval);
@@ -186,7 +205,7 @@ int getSocketError(int sockfd)
     }
 }
 
-struct sockaddr_in getLocalAddr(int sockfd)
+struct sockaddr_in net::getLocalAddr(int sockfd)
 {
     struct sockaddr_in localaddr;
     explicit_bzero(&localaddr, sizeof localaddr);
@@ -199,7 +218,7 @@ struct sockaddr_in getLocalAddr(int sockfd)
     return localaddr;
 }
 
-struct sockaddr_in getPeerAddr(int sockfd)
+struct sockaddr_in net::getPeerAddr(int sockfd)
 {
     struct sockaddr_in peeraddr;
     explicit_bzero(&peeraddr, sizeof peeraddr);

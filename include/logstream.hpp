@@ -2,7 +2,7 @@
 #define LOGSTREAM_H
 #include <string.h>
 #include<assert.h> 
-#include "nocopy.h"
+#include "nocopy.hpp"
 #include<stdio.h>
 #include<string>
 namespace yb

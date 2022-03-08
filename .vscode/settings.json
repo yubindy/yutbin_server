@@ -95,7 +95,13 @@
         "codecvt": "cpp",
         "source_location": "cpp",
         "cassert": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "csignal": "cpp",
+        "any": "cpp",
+        "strstream": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp",
+        "*.ipp": "cpp"
     },
     "code-runner.executorMap": {
         "javascript": "node",

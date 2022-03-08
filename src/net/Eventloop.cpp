@@ -1,4 +1,4 @@
-#include "Eventloop.h"
+#include "Eventloop.hpp"
 using namespace yb;
 using namespace yb::net;
 namespace
@@ -98,35 +98,36 @@ void Eventloop::wakeup()
         LOG(lev::ERROR) << "EventLoop::wakeup error" << endl;
     }
 }
-
 void Eventloop::updateChannel(Channel *channel)
 {
     assertInLoopThread();
     poller_->updatechannel(channel);
 }
 bool Eventloop::hasChannel(Channel *channel)
-{   assertInLoopThread();
-    poller_->haschannel(Channel);
+{
+    assertInLoopThread();
+    poller_->haschannel(channel);
 }
-// bool loop_;
-// std::atomic<bool> quit_;
-// bool eventHandling_;          //是否事件循环
-// bool callingPendingFunctors_; //是否处理后续任务
-// const pid_t threadid;
-// int wakefd;
-// std::unique_ptr<Channel *> wakechannel_;
-// std::unique_ptr<poller> poller_;
-// Timestamp time;
-// mutable std::mutex mutex_;
-// Channel *curractivechannel;
-// channelist activelist;
-// Functlist pendinglist;
-
-// void addConnect(std::shared_ptr<Tcpconnection> con);
-// void rmConnect(std::shared_ptr<Tcpconnection> con);
-// void addConnectInLoop(std::shared_ptr<Tcpconnection> con);
-// void rmConnectInLoop(std::shared_ptr<Tcpconnection> con);
-
-// private:
-// void handleRead();        //用于 读取Wakeupfd 为了唤醒所发送的内容
-// void doPendingFunctors(); /* 执行小任务函数 */
+void Eventloop::handleRead()
+{
+    uint64_t one = 1;
+    ssize_t n = read(wakefd, &one, sizeof(one));
+    if (n != sizeof(one))
+    {
+        LOG(lev::ERROR) << "EventLoop::handleRead() reads " << n << " bytes instead of 8" << endl;
+    }
+}
+void Eventloop::doPendingFunctors()
+{
+     Functlist funtors;
+     callingPendingFunctors_=true;
+     {
+        std::lock_guard<std::mutex> lock(mutex_);
+        pendinglist.swap(funtors);
+    }
+    for(const Function&fun:funtors)
+    {
+        fun();
+    }
+    callingPendingFunctors_=false;
+}
