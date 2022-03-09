@@ -28,19 +28,18 @@ namespace yb
             bool disconnected() const { return state_ == kDisconnected; }
             // void send(string&& message); // C++11
             void send(const void *message, int len);
-            void send(const std::string &message);
+            void send(std::string &message);
             // void send(Buffer&& message); // C++11
             void sendFile(int fd, int fileSize);
             void send(netbuffer *message); // this one will swap data
             void shutdown();               // NOT thread safe, no simultaneous calling
-            // void shutdownAndForceCloseAfter(double seconds); // NOT thread safe, no
-            // simultaneous calling
+            void shutdownInLoop();
             void forceClose();
-            void forceCloseWithDelay(double seconds);
             void setTcpNoDelay(bool on);
             // reading or not
             void startRead();
             void stopRead();
+            std::string name() const {return name_;}
             bool isReading() const
             {
                 return reading_;
@@ -97,7 +96,6 @@ namespace yb
             void sendInLoop(const char *message, size_t len);
 
             void shutdownWriteInLoop(); /* 关闭写 */
-            // void shutdownAndForceCloseInLoop(double seconds);
             void forceCloseInLoop();
             void setState(State s) { state_ = s; }
             const char *stateToString() const;

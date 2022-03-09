@@ -1,6 +1,6 @@
 #include "Channel.hpp"
 #include "poller.hpp"
-#include<sstream>
+#include <sstream>
 using namespace yb;
 using namespace yb::net;
 static const int kNoneEvent = EPOLLET;
@@ -46,10 +46,6 @@ void Channel::handleEVentwithguard(Timestamp recvtime)
     LOG(lev::TRACE) << reventsToString();
     if ((recvevents_ & EPOLLHUP) && !(recvevents_ & EPOLLIN))
     {
-        // if (logHup_)
-        // {
-        //   LOG(lev::WARN) << "fd = " << fd_ << " Channel::handle_event() POLLHUP";
-        // }
         if (closeCallback_)
             closeCallback_();
     }
@@ -67,7 +63,7 @@ void Channel::handleEVentwithguard(Timestamp recvtime)
     if (recvevents_ & (EPOLLIN | EPOLLPRI | EPOLLRDHUP))
     {
         if (readCallback_)
-            readCallback_();
+            readCallback_(recvtime);
     }
     if (recvevents_ & EPOLLOUT)
     {

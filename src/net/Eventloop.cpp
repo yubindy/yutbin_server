@@ -54,6 +54,13 @@ void Eventloop::loop()
         doPendingFunctors();
     }
 }
+void Eventloop::assertInLoopThread() {
+  if (!isInLoopThread()) {
+    LOG(lev::FATAL) << "not in specified EventLoop"
+               << (isMainLoop() ? "(mainLoop)" : "(subLoop)") <<endl;
+  }
+}
+
 void Eventloop::removeChannel(Channel *chan)
 {
     assertInLoopThread();
