@@ -98,119 +98,145 @@ void TcpConnection::send(const void *message, int len)
          sendInLoop(message, len);
       }
       else
-      {   
+      {
          subloop->runInLoop(
              [this, message, len]()
              { this->sendInLoop(message, len); });
       }
    }
 }
-// void TcpConnection::send(std::string &message)
-// {
-//    if (state_ == kConnected)
-//    {
-//       Eventloop *subloop = getLoop();
-//       if (subloop->isInLoopThread())
-//       {
-//          sendInLoop(std::move(message));
-//       }
-//       else
-//       {
-//          subloop->runInLoop(
-//              [this, message]()
-//              { this->sendInLoop(std::move(message)); });
-//       }
-//    }
-// }
-
-void TcpConnection::sendFile(int fd, int fileSize)
+void TcpConnection::send(std::string &message)
 {
-   if(fd<0)
+   if (state_ == kConnected)
    {
-      return;
-   }
-   if(state_==kConnected)
-   {
-      Eventloop * subloop=getLoop();
-      if(subloop->isInLoopThread())
+      if (loop_->isInLoopThread())
       {
-         sendInLoop(NULL,0,fd,fileSize);
-      }else
+         sendInLoop(message);
+      }
+      else
       {
-          subloop->runInLoop(std::bind(&TcpConnection::sendInLoop,NULL,0,fd,fileSize));
+         //  loop_->runInLoop(std::bind(&TcpConnection::sendInLoop,this,message));
+         loop_->runInLoop([this, message]
+                          { this->sendInLoop(message);});   
       }
    }
 }
-void TcpConnection::send(netbuffer* buf)
+
+void TcpConnection::sendInLoop(std::string &message)
 {
-  if (state_ == kConnected)
-  {
-    if (loop_->isInLoopThread())
-    {
-      sendInLoop(buf->peek(), buf->readbyte());
-      buf->retrieveAll();
-    }
-    else
-    {
-      void (TcpConnection::*fp)(std::string&) = &TcpConnection::sendInLoop;
-      loop_->runInLoop(
-          std::bind(fp,
-                    this,     // FIXME
-                    buf->begin()));
-                    //std::forward<string>(message)));
-    }
-  }
+   sendInLoop(static_cast<const void *>(message.c_str()),
+              message.size());
+}
+void TcpConnection::sendInLoop(const void *message, size_t len)
+{
+   loop_->assertInLoopThread();
+   ssize_t nwrite = 0;
+   size_t remaining = len;
+   bool err = false;
+   if (state_ == kDisconnected)
+   {
+      LOG(lev::WARN) << "disconnected, give up writing";
+      return;
+   }
+   if (!channel_->isWriting() && outputBuffer_.readbyte() == 0)
+   {
+      nwrite = ::write(channel_->getfd(), message, len);
+      if (nwrite > 0)
+      {
+         remaining = len - nwrite;
+         if (remaining == 0 && writeCompleteCallback_)
+         {
+            loop_->queueInLoop(std::bind(writeCompleteCallback_, shared_from_this()));
+         }
+      }
+   }
+   else
+   {
+      nwrite = 0;
+      if (errno != EWOULDBLOCK)
+      {
+         if (errno == EPIPE || errno == ECONNRESET) // FIXME: any others?
+         {                                          //服务端收到RST报文后 write出现EPIPE recv出现ECONNRESET
+            err = true;                             //出现错误
+         }
+      }
+   }
+   assert(remaining <= len);
+   if (!err && remaining > 0)
+   {
+      outputBuffer_.append(static_cast<const char *>(message) + nwrite, remaining);
+      if (!channel_->isWriting())
+      {
+         channel_->enableWriting();
+      }
+   }
 }
 void TcpConnection::shutdown()
 {
-  // FIXME: use compare and swap
-  if (state_ == kConnected)
-  {
-    setState(kDisconnecting);
-    // FIXME: shared_from_this()?
-    loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
-  }
+   // FIXME: use compare and swap
+   if (state_ == kConnected)
+   {
+      setState(kDisconnecting);
+      // FIXME: shared_from_this()?
+      loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
+   }
 }
 void TcpConnection::shutdownInLoop()
 {
-  loop_->assertInLoopThread();
-  if (!channel_->isWriting())
-  {
-    // we are not writing
-    socket_->shutdownWrite();
-  }
+   loop_->assertInLoopThread();
+   if (!channel_->isWriting())
+   {
+      // we are not writing
+      socket_->shutdownWrite();
+   }
 }
 void TcpConnection::forceClose()
 {
-  if (state_ == kConnected || state_ == kDisconnecting)
-  {
-    setState(kDisconnecting);
-    loop_->queueInLoop(std::bind(&TcpConnection::forceCloseInLoop, shared_from_this()));
-  }
+   if (state_ == kConnected || state_ == kDisconnecting)
+   {
+      setState(kDisconnecting);
+      loop_->queueInLoop(std::bind(&TcpConnection::forceCloseInLoop, shared_from_this()));
+   }
 }
 void TcpConnection::forceCloseInLoop()
 {
-  loop_->assertInLoopThread();
-  if (state_ == kConnected || state_ == kDisconnecting)
-  {
-    // as if we received 0 byte in handleRead();
-    handleClose();
-  }
+   loop_->assertInLoopThread();
+   if (state_ == kConnected || state_ == kDisconnecting)
+   {
+
+      handleClose();
+   }
 }
 void TcpConnection::setTcpNoDelay(bool on)
 {
-  socket_->setTcpNoDelay(on);
+   socket_->setTcpNoDelay(on);
 }
 
-// // reading or not
-// void startRead();
-// void stopRead();
-void sendInLoop(std::string &&message);
-void sendInLoop(std::string &message);
-void sendInLoop(const void *message = NULL, size_t len = 0,
-                int sendFileFd = -1, int sendFileSize = 0);
-void sendInLoop(const char *message, size_t len)
+void TcpConnection::startRead()
 {
+   loop_->runInLoop(std::bind(&TcpConnection::startReadInLoop, this));
+}
+void TcpConnection::startReadInLoop()
+{
+   loop_->assertInLoopThread();
+   if (!reading_ || channel_->isReading())
+   {
+      channel_->enableReading();
+      reading_ = true;
+   }
+}
+void TcpConnection::stopRead()
+{
+   loop_->runInLoop(std::bind(&TcpConnection::stopReadInLoop, this));
+}
+void TcpConnection::stopReadInLoop()
+{
+   loop_->assertInLoopThread();
+   if (reading_ || channel_->isReading())
+   {
+      channel_->disableReading();
+      reading_ = false;
+   }
 }
 void TcpConnection::connectEstablished()
 {
@@ -232,19 +258,3 @@ void TcpConnection::connectDestroyed()
    }
    channel_->remove();
 }
-// Eventloop *loop_;
-// const std::string name_;
-// State state_; // FIXME: use atomic variable
-// bool reading_;
-// // we don't expose those classes to client.
-// std::unique_ptr<Socket> socket_;
-// std::unique_ptr<Channel> channel_;
-// const InetAddress localAddr_;
-// const InetAddress peerAddr_;
-// ConnectionCallback connectionCallback_;
-// MessageCallback messageCallback_;
-// WriteCompleteCallback writeCompleteCallback_;
-// CloseCallback closeCallback_;
-// size_t highWaterMark_;
-// netbuffer inputBuffer_;
-// netbuffer outputBuffer_;

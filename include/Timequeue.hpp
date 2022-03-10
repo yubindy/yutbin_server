@@ -43,7 +43,7 @@ namespace yb
 
             Eventloop *loop;
             const int timerfd;
-            channel timerfdChannel;
+            Channel timerfdChannel;
             // Timer list sorted by expiration
             TimerList timers;
             // for cancel()

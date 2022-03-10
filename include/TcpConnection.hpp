@@ -6,7 +6,7 @@
 #include "InetAddress.hpp"
 #include "Timestamp.hpp"
 #include "InetAddress.hpp"
-#include"Channel.hpp"
+#include "Channel.hpp"
 namespace yb
 {
     namespace net
@@ -17,7 +17,7 @@ namespace yb
         class TcpConnection : nocopy, public std::enable_shared_from_this<TcpConnection>
         {
         public:
-            TcpConnection(Eventloop *loop, int sockfd,const std::string& nameArg,
+            TcpConnection(Eventloop *loop, int sockfd, const std::string &nameArg,
                           const InetAddress &localAddr, const InetAddress &peerAddr);
             ~TcpConnection();
 
@@ -30,7 +30,7 @@ namespace yb
             void send(const void *message, int len);
             void send(std::string &message);
             // void send(Buffer&& message); // C++11
-            void sendFile(int fd, int fileSize);
+            // void sendFile(int fd, int fileSize);
             void send(netbuffer *message); // this one will swap data
             void shutdown();               // NOT thread safe, no simultaneous calling
             void shutdownInLoop();
@@ -39,7 +39,7 @@ namespace yb
             // reading or not
             void startRead();
             void stopRead();
-            std::string name() const {return name_;}
+            std::string name() const { return name_; }
             bool isReading() const
             {
                 return reading_;
@@ -91,10 +91,8 @@ namespace yb
             void handleError();
             void sendInLoop(std::string &&message);
             // void sendInLoop(const StringPiece &message);
-            void sendInLoop(const void *message = NULL, size_t len = 0,
-                            int sendFileFd = -1, int sendFileSize = 0);
-            void sendInLoop(const char *message, size_t len);
-
+            void sendInLoop(const void *message, size_t len);
+            void sendInLoop(std::string &message);
             void shutdownWriteInLoop(); /* 关闭写 */
             void forceCloseInLoop();
             void setState(State s) { state_ = s; }
@@ -117,7 +115,7 @@ namespace yb
             CloseCallback closeCallback_;
             size_t highWaterMark_;
             netbuffer inputBuffer_;
-            netbuffer outputBuffer_; 
+            netbuffer outputBuffer_;
             // FIXME: use list<Buffer> as output buffer.
             // FIXME: creationTime_, lastReceiveTime_
             //        bytesReceived_, bytesSent_

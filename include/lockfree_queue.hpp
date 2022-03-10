@@ -2,6 +2,7 @@
 #define LOCKFREE_QUEUE .H
 #include <atomic>
 #include <memory>
+//无锁线程池实现
 namespace yb
 {
     template <typename T>
@@ -27,6 +28,13 @@ namespace yb
         }
         int count() { return cnt.load(); }
         bool isempty() { return cnt.load() == 0 ? true : false; }
+        void trypop()
+        {
+            while (!front.compare_exchange_strong(end,front))
+            {
+            }
+            
+        }
         void push(T &&num)
         {
             node *newd = new node(make_shared(num), nullptr);

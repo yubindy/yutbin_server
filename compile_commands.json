@@ -1,1 +1,122 @@
-./build/compile_commands.json
+[
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/test/testlog.o -c /home/zhaozeyu/Desktop/study/yutbin_server/test/testlog.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/test/testlog.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/Coroutines.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/Coroutines.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/Coroutines.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/Thread.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/Thread.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/Thread.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/Threadpool.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/Threadpool.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/Threadpool.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/Timestamp.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/Timestamp.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/Timestamp.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/asyclogging.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/asyclogging.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/asyclogging.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/fileutil.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/fileutil.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/fileutil.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/logfile.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/logfile.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/logfile.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/logging.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/logging.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/logging.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/base/logstream.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/base/logstream.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/base/logstream.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Acceptor.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Acceptor.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Acceptor.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Channel.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Channel.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Channel.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Connector.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Connector.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Connector.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Eventloop.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Eventloop.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Eventloop.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/EventloopThread.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/EventloopThread.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/EventloopThread.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/EventloopThreadpool.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/EventloopThreadpool.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/EventloopThreadpool.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/InetAddress.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/InetAddress.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/InetAddress.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Socket.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Socket.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Socket.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/TcpConnection.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/TcpConnection.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/TcpConnection.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Tcpclient.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Tcpclient.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Tcpclient.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Tcpserver.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Tcpserver.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Tcpserver.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/Timequeue.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/Timequeue.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/Timequeue.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/netbuffer.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/netbuffer.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/netbuffer.cpp"
+},
+{
+  "directory": "/home/zhaozeyu/Desktop/study/yutbin_server",
+  "command": "/usr/bin/c++  -I/home/zhaozeyu/Desktop/study/yutbin_server/include -std=gnu++17 -o CMakeFiles/yutbin_server.dir/src/net/poller.o -c /home/zhaozeyu/Desktop/study/yutbin_server/src/net/poller.cpp",
+  "file": "/home/zhaozeyu/Desktop/study/yutbin_server/src/net/poller.cpp"
+}
+]

@@ -6,9 +6,9 @@
 #include <vector>
 #include <condition_variable>
 #include <atomic>
-#include "Thread.hpp"
+#include <thread>
 #include "lockfree_queue.hpp"
-class lf_queue;
+class lf_queue; //无锁版本
 namespace yb
 {
     class threadpool
@@ -25,10 +25,10 @@ namespace yb
     public:
         threadpool(int num) : threadnum(num)
         {
-            que = std::make_shared(new lf_queue<task>);
+            que = std::make_shared<lf_queue<task>>();
             for (int i = 0; i < threadnum; i++)
             {
-                thd.emplace_back(new yb::Thread(std::bind(threadpool::take, this), static_cast<int> i));
+                thd.emplace_back(new std::thread(std::bind(&threadpool::take, this)));
             }
             start.store(true);
         }
@@ -36,23 +36,27 @@ namespace yb
         {
             while (start.load())
             {
-                while (que->isempty())
+                if (que->isempty())
                 {
+                    que->trypop();
                 }
                 task t(que->pop());
-                if(t)
+                if (t)
                 {
                     t();
                 }
             }
         }
-        void add(task &&t)
+        void add(task &t)
         {
-            if(start.store())
+            if (start.load())
             {
-                que->push(t);
+                if (que->isempty())
+                {
+                    task();
+                }
+                que->push(std::move(t));
             }
-
         }
         ~threadpool() { start.store(false); }
     };

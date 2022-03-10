@@ -3,13 +3,12 @@ using namespace yb;
 using namespace yb::net;
 
 EventloopThread::EventloopThread(const ThreadInitCallback &cb)
-    : loop_(NULL), exiting_(false), thread_(std::bind(&EventloopThread::threadfunc, this)),
+    : loop_(NULL), exiting_(false), pt(t.get_future()), thread_(std::bind(&EventloopThread::threadfunc, this)),
       callback_(cb)
 {
     if (!loop_)
     {
-        std::unique_lock<std::mutex> lock(mut_);
-        cond_.wait(lock, loop_);
+        pt.get();
     }
 }
 EventloopThread::~EventloopThread()
@@ -23,27 +22,19 @@ EventloopThread::~EventloopThread()
 }
 Eventloop *EventloopThread::startloop()
 {
-    {
-        std::unique_lock<std::mutex> lock(mut_);
-        while (loop_ = NULL)
-        {
-            cond_.wait(lock, loop_);
-        }
-
+    {   
+        pt=t.get_future();
+        pt.get();
         return loop_;
     }
 }
 void EventloopThread::threadfunc()
 {
     Eventloop loop;
-    if(callback_)
+    if (callback_)
     {
         callback_(&loop);
     }
-    {
-         std::unique_lock<std::mutex> lock(mut_);
-         loop_=&loop;
-         cond_.notify_one();
-    }
-
+    loop_ = &loop;
+    t.set_value(true);
 }

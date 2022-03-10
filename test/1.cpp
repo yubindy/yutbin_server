@@ -1,16 +1,16 @@
 #include<functional>
 #include<stdio.h>
-using Funtor=std::function<void()>;
-void fun(int t)
+void func(int& t)
 {
-    printf("%d",t);
+    printf("左\n");
 }
-void doing(int x)
+void func(int&& t)
 {
-    auto s=std::bind(fun,std::placeholders::_1);
-    return s(x);
+    printf("右值\n");
 }
 int main()
 {
-    doing(8);
+    int t=20;
+    func(t);
+    func(std::move(std::move(t)));
 }
