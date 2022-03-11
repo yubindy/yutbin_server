@@ -3,7 +3,7 @@
 #include"logstream.hpp"
 #include <errno.h>
 using namespace yb;
-logger::loglevel loglev=lev::TRACE;
+static logger::loglevel loglev=lev::TRACE;
 __thread char errbuf[512];
 thread_local std::string times;
 __thread time_t lastime;

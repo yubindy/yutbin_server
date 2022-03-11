@@ -111,12 +111,12 @@ void TcpConnection::send(std::string &message)
    {
       if (loop_->isInLoopThread())
       {
-         sendInLoop(message);
+         this->sendInLoop(message);
       }
       else
       {
          //  loop_->runInLoop(std::bind(&TcpConnection::sendInLoop,this,message));
-         loop_->runInLoop([this, message]
+         loop_->runInLoop([this, &message]
                           { this->sendInLoop(message);});   
       }
    }

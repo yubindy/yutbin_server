@@ -2,9 +2,22 @@
 #include "Eventloop.hpp"
 using namespace yb;
 using namespace yb::net;
-Tcpserver::Tcpserver(Eventloop *loop, const InetAddress address, const std::string &name,int numthread) : mainloop(loop), ipport(address.toIpPort()),
-                                                                                                          acceptor_(new Acceptor(loop, address, true)), threadpool_(new EventloopThreadpool(mainloop)),
-                                                                                                          connback(defaultConnectionCallback), messback(defaultMessageCallback),threadnum(numthread)
+// std::shared_ptr<Eventloop> mainloop;
+// const std::string ipport;
+// int nextConnId_;
+// const std::string name;
+// std::unique_ptr<Acceptor> acceptor_;
+// std::shared_ptr<EventloopThreadpool> threadpool_;
+// ConnectionCallback connback;
+// MessageCallback messback;
+// WriteCompleteCallback writeback;
+// ThreadInitback threadinit_;
+// Connectmap connects;
+// std::atomic<bool> stared_;
+// int threadnum;
+Tcpserver::Tcpserver(Eventloop *loop, const InetAddress address, const std::string &name_, int numthread) : mainloop(loop), ipport(address.toIpPort()),name(name_),
+                                                                                                           acceptor_(new Acceptor(loop, address, true)), threadpool_(new EventloopThreadpool(loop)),
+                                                                                                           connback(defaultConnectionCallback), messback(defaultMessageCallback), threadnum(numthread)
 {
     acceptor_->setConnectback(std::bind(&Tcpserver::newConnection, this, _1, _2));
     threadpool_->setThreadNum(numthread);
@@ -28,18 +41,18 @@ void Tcpserver::setThreadnums(int num)
     threadpool_->setThreadNum(num);
 }
 void Tcpserver::start()
-{    
-    bool expect=false;
-    if (stared_.compare_exchange_strong(expect,true))
+{
+    bool expect = false;
+    if (stared_.compare_exchange_strong(expect, true))
     {
-        threadpool_->start(threadinit_);//启动i/o线程池
-        mainloop->runInLoop(std::bind(&Acceptor::listen,acceptor_));
+        threadpool_->start(threadinit_); //启动i/o线程池
+        mainloop->runInLoop(std::bind(&Acceptor::listen, acceptor_));
     }
 }
 void Tcpserver::newConnection(int sockfd, const InetAddress &peerAddr) // accept 回调
 {
     mainloop->assertInLoopThread();
-    Eventloop *ioloop = threadpool_->getNextLoop(); 
+    Eventloop *ioloop = threadpool_->getNextLoop();
     char buf[64];
     snprintf(buf, sizeof(buf), "-%s#%d", ipport.c_str(), nextConnId_);
     ++nextConnId_;
@@ -48,7 +61,7 @@ void Tcpserver::newConnection(int sockfd, const InetAddress &peerAddr) // accept
                    << "] - new connection [" << connName
                    << "] from " << peerAddr.toIpPort() << endl;
     InetAddress localAddr(getLocalAddr(sockfd)); //获取本地地址
-    Tcpconptr conn(new TcpConnection(ioloop,sockfd,connName,localAddr,peerAddr));
+    Tcpconptr conn(new TcpConnection(ioloop, sockfd, connName, localAddr, peerAddr));
     connects[connName] = conn;
     conn->setConnectionCallback(connback);
     conn->setMessageCallback(messback);
@@ -58,25 +71,13 @@ void Tcpserver::newConnection(int sockfd, const InetAddress &peerAddr) // accept
 }
 void Tcpserver::removeConnection(const TcpConnectionPtr &conn)
 {
-   mainloop->runInLoop(std::bind(&Tcpserver::removeConnectionInLoop,this,conn));
+    mainloop->runInLoop(std::bind(&Tcpserver::removeConnectionInLoop, this, conn));
 }
 void Tcpserver::removeConnectionInLoop(const TcpConnectionPtr &conn)
 {
     mainloop->assertInLoopThread();
-    size_t n=connects.erase(conn->name());
-    assert(n==1);
-    Eventloop* ioloop=conn->getLoop();
-    ioloop->queueInLoop(std::bind(&TcpConnection::connectDestroyed,conn));
+    size_t n = connects.erase(conn->name());
+    assert(n == 1);
+    Eventloop *ioloop = conn->getLoop();
+    ioloop->queueInLoop(std::bind(&TcpConnection::connectDestroyed, conn));
 }
-// std::shared_ptr<Eventloop> mainloop;
-// const std::string ipport;
-// const std::string name;
-// std::unique_ptr<Acceptor> acceptor_;
-// std::shared_ptr<EventloopThreadpool> threadpool_;
-// ConnectionCallback connback;
-// MessageCallback messback;
-// WriteCompleteCallback writeback;
-// ThreadInitback threadinit_;
-// Connectmap connects;
-// std::atomic<bool> stared_;
-// int threadnum;

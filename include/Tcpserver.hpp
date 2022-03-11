@@ -20,7 +20,7 @@ namespace yb
         public:
             using ThreadInitback = std::function<void(Eventloop *)>;
             using TcpConnectionPtr = std::shared_ptr<TcpConnection>;
-            Tcpserver(Eventloop *loop, const InetAddress address, const std::string &name, int numthread = 4); //默认4 i/o线程
+            Tcpserver(Eventloop *loop, const InetAddress address, const std::string &name_, int numthread = 4); //默认4 i/o线程
             ~Tcpserver();
             void start();
             const std::string &getipport() const { return ipport; }

@@ -2,7 +2,12 @@
 #include <fcntl.h>
 using namespace yb;
 using namespace yb::net;
-
+// Eventloop *loop;
+// Socket acceptsocket;
+// Channel acceptChannel;
+// NewConnectionback NewConnection_;
+// bool listen_;
+// int fd_;
 Acceptor::Acceptor(Eventloop *loop_, const InetAddress &listenaddr, bool reuseport) : loop(loop_), acceptsocket(createNonblockingOrDie(listenaddr.family())),
                                                                                       acceptChannel(loop, acceptsocket.fd()), fd_(open("/dev/null", O_RDONLY | O_CLOEXEC))
 {
