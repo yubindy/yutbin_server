@@ -13,7 +13,7 @@ namespace yb
     class logfile : nocopy
     {
     public:
-        logfile(const std::string &name_, off_t rollsize_, bool threadsafe_ = true, int flushtime_ = 3, int checkevery_ = 1024) : name(name_), rollsize(rollsize_), threadsafe(threadsafe_), flushtime(flushtime_), checkevery(checkevery_), count(0), mutex_(threadsafe ? new std::mutex : nullptr),
+        logfile(const std::string &name_, off_t rollsize_, bool threadsafe_ = true, int flushtime_ = 60, int checkevery_ = 1024) : name(name_), rollsize(rollsize_), threadsafe(threadsafe_), flushtime(flushtime_), checkevery(checkevery_), count(0), mutex_(threadsafe ? new std::mutex : nullptr),
                                                                                                                       lastday(0), lastroll(0), lastflush(0) { rollfile(); }
         ~logfile()=default;
         void append(const char *log, int len);
