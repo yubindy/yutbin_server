@@ -1,6 +1,7 @@
 #ifndef HTTPER_H
 #define HTTPER_H
 #include "Httper.hpp"
+#include "Callback.hpp"
 #include "TcpConnection.hpp"
 #include <memory>
 #include <sstream>
@@ -13,7 +14,6 @@ namespace yb
     {
         class HttpResponse
         {
-            using TcpConnectionPtr = std::shared_ptr<TcpConnection>;
 
         public:
             enum repState_
@@ -24,7 +24,7 @@ namespace yb
                 DontKnow
             };
             static const char *statestring[DontKnow];
-            HttpResponse(const TcpConnectionPtr &conn) : fd_(-1), size_(0), conn_(conn) {}
+            HttpResponse(const Tcpconptr &conn) : fd_(-1), size_(0), conn_(conn) {}
             void setStatusCode(repState_ state) { state_ = state; }
             void setVersion(std::string v) { version_ = v; }
             void setBody(std::string &&body)
@@ -72,12 +72,13 @@ namespace yb
                 stream << "\r\n";
                 std::string str(stream.str());
                 conn_->send(str);
-                if(fd_>0&&size_>0)
+                if (fd_ > 0 && size_ > 0)
                 {
-                    conn_->sendFile(fd_,size_);
-                }else if(size_==body_.size())
+                    conn_->sendFile(fd_, size_);
+                }
+                else if (size_ == body_.size())
                 {
-                    conn_->send(body_.c_str(),size_);
+                    conn_->send(body_.c_str(), size_);
                 }
             }
 
@@ -89,7 +90,7 @@ namespace yb
             std::string sourceDir_;  /* ./source */
             std::string sourceFile_; /* 我们需要发送的文件 */
             std::shared_ptr<Httper> request_;
-            TcpConnectionPtr conn_;
+            Tcpconptr conn_;
             int fd_;           /* 需要发送的文件fd */
             std::string body_; /* 如果发送的不是文件，而只是一个body */
         };

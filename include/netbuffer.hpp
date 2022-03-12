@@ -25,7 +25,7 @@ namespace yb
             size_t writebyte() const { return buffer_.size() - writeindex_; }
             char *begin() { return &*buffer_.begin(); }
             bool checkmove() { return readindex_ != khead; }
-            char* peek() {return &buffer_[readindex_];}
+            char* peek() {return &buffer_[readindex_];}     
             void Capity(int len)
             {
                 if (writebyte() < len)

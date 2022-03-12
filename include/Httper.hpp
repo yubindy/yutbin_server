@@ -35,7 +35,7 @@ namespace yb
             void setmethod(method mod_) { mod = mod_; }
             void seturl(std::string url_) { url = std::move(url_); }
             void setversion(std::string version_) { version = std::move(version_); }
-            std::string geturl() { return url; }
+            const std::string  geturl() { return url; }
             std::string getversion() { return version; }
             method getmethod() { return mod; }
             const char *getstringmethod() { return httpstringmethod[mod]; }
@@ -45,7 +45,7 @@ namespace yb
         private:
             linestate statnow;
             method mod;          //请求方法
-            std::string url;     // url
+            mutable std::string url;     // url
             std::string version; //版本号
             static const char *httpstringmethod[method::DONT_UNDERSTAND];
         };
@@ -105,6 +105,7 @@ namespace yb
             void requestline();
             void requesthead();
             void requestmessage(int len_);
+            HttpRequestate* getrequest() {return request.get();}
             totalstate requestall();
             int httpersize;
         private:
