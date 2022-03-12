@@ -17,6 +17,7 @@ namespace yb
             HttpServer(int poolthreads, InetAddress &addr) : pool(new ThreadPool()), mainloop(new Eventloop()), tcpserver_(new net::Tcpserver(mainloop, addr, "httpserver"))
             {
                 pool->start(poolthreads);
+                srand(time(nullptr));
             }
             void Messageback(const Tcpconptr &conn, netbuffer *buf);
             void Connectionback(const Tcpconptr &conn);
