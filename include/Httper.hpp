@@ -40,7 +40,7 @@ namespace yb
             method getmethod() { return mod; }
             const char *getstringmethod() { return httpstringmethod[mod]; }
             void debug();
-            void setnow(linestate t) {statnow=t;}
+            void setnow(linestate t) { statnow = t; }
 
         private:
             linestate statnow;
@@ -56,6 +56,7 @@ namespace yb
             void add(std::string key, std::string value) { head.insert(key, value); }
             void remove(std::string key) { head.erase(key); }
             std::string getvalue(std::string key) { return head[key]; }
+            std::pair<std::string,std::string> get(std::string kv){return *head.find(kv);}
             void debug()
             {
                 LOG(lev::DEBUG) << "Httphead" << endl;
@@ -103,8 +104,9 @@ namespace yb
             Httper(const char *buf_, int len_) : buf(buf_), len(len_), pt(0), m_end(0), m_beg(0), end(continues), line(linecontinue), request(new HttpRequestate()) {}
             void requestline();
             void requesthead();
-            void requestmessage(int len);
-
+            void requestmessage(int len_);
+            totalstate requestall();
+            int httpersize;
         private:
             const char *CR_LF = "\r\n";
             const char *buf;

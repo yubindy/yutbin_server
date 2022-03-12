@@ -30,7 +30,7 @@ namespace yb
             void send(const void *message, int len);
             void send(std::string &message);
             // void send(Buffer&& message); // C++11
-            // void sendFile(int fd, int fileSize);
+            void sendFile(int fd, int fileSize);
             void send(netbuffer *message); // this one will swap data
             void shutdown();               // NOT thread safe, no simultaneous calling
             void shutdownInLoop();

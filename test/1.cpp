@@ -1,16 +1,12 @@
-#include<functional>
-#include<stdio.h>
-void func(int& t)
-{
-    printf("左\n");
-}
-void func(int&& t)
-{
-    printf("右值\n");
-}
+#include <functional>
+#include <stdio.h>
+#include <string.h>
 int main()
 {
-    int t=20;
-    func(t);
-    func(std::move(std::move(t)));
+    char buf[50] = "csfcsdc\r\ndcdscfdvfd";
+    int pt=0,len=50;
+    while (pt != len && buf[pt++] != '\r' && buf[pt] != '\n')
+    {
+    }
+    printf("%d:%s",pt,buf+pt);
 }

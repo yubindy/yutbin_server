@@ -1,4 +1,5 @@
 #include "TcpConnection.hpp"
+#include<sys/sendfile.h>
 using namespace yb;
 using namespace yb::net;
 void TcpConnection::defaultConnectionCallback(const TcpConnectionPtr &conn)
@@ -126,6 +127,11 @@ void TcpConnection::sendInLoop(std::string &message)
 {
    sendInLoop(static_cast<const void *>(message.c_str()),
               message.size());
+}
+void TcpConnection::sendFile(int fd, int fileSize)
+{
+   loop_->assertInLoopThread();
+   sendfile(fd,channel_->getfd(),NULL,fileSize);
 }
 void TcpConnection::sendInLoop(const void *message, size_t len)
 {

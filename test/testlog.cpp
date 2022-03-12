@@ -2,7 +2,8 @@
 #include <cmath>
 using namespace yb;
 int main(int argc, char const *argv[])
-{
+{ 
+  logger::setLogLevel(lev::INFO);
   logger log("asd.log",20,nullptr,0);
   int t = 10000;
   const char *s = NULL;
@@ -21,7 +22,7 @@ int main(int argc, char const *argv[])
 }
 //     void threadFunc();
 //     std::thread td_;
-//     mutable std::mutex m_;
+//     mutable std::mutex m_; 
 //     std::condition_variable cv_;
 //     std::promise<void> p_;
 //     std::atomic<bool> running_;
