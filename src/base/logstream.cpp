@@ -54,6 +54,7 @@ logstream &logstream::operator<<(unsigned long long v)
     formatint(v);
     return *this;
 }
+
 logstream &logstream::operator<<(const void *v)
 {
     if (32 <= buf_.avail())
