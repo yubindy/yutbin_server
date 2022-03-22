@@ -44,11 +44,13 @@ logstream &logstream::operator<<(unsigned long v)
     formatint(v);
     return *this;
 }
+
 logstream &logstream::operator<<(long long v)
 {
     formatint(v);
     return *this;
 }
+
 logstream &logstream::operator<<(unsigned long long v)
 {
     formatint(v);
