@@ -45,7 +45,6 @@ namespace yb
         std::future<void> s = pro.get_future();
         if (pthread_create(thd, nullptr, runthread, static_cast<void *>(data)))
         {
-            // log
         }
         else
         {

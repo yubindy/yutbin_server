@@ -2,19 +2,6 @@
 #include "Eventloop.hpp"
 using namespace yb;
 using namespace yb::net;
-// std::shared_ptr<Eventloop> mainloop;
-// const std::string ipport;
-// int nextConnId_;
-// const std::string name;
-// std::unique_ptr<Acceptor> acceptor_;
-// std::shared_ptr<EventloopThreadpool> threadpool_;
-// ConnectionCallback connback;
-// MessageCallback messback;
-// WriteCompleteCallback writeback;
-// ThreadInitback threadinit_;
-// Connectmap connects;
-// std::atomic<bool> stared_;
-// int threadnum;
 Tcpserver::Tcpserver(Eventloop *loop, const InetAddress address, const std::string &name_, int numthread) : mainloop(loop), ipport(address.toIpPort()),name(name_),
                                                                                                            acceptor_(new Acceptor(loop, address, true)), threadpool_(new EventloopThreadpool(loop)),
                                                                                                            connback(defaultConnectionCallback), messback(defaultMessageCallback), threadnum(numthread)
