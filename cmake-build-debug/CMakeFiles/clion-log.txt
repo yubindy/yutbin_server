@@ -1,0 +1,6 @@
+/opt/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/make -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -G "CodeBlocks - Unix Makefiles" -S /home/yubtin/Desktop/codes/yutbin_server -B /home/yubtin/Desktop/codes/yutbin_server/cmake-build-debug
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  CMake 3.23.1 or higher is required.  You are running version 3.22.3
+
+
+-- Configuring incomplete, errors occurred!
