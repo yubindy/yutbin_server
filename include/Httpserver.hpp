@@ -1,9 +1,8 @@
 #ifndef HTTPSERVER_hpp
 #define HTTPSERVER_hpp
 #include "Threadpool.hpp"
-#include "nocopy.hpp"
+ #include "nocopy.hpp"
 #include "Tcpserver.hpp"
-#include <Threadpool.hpp>
 #include "Httper.hpp"
 #include "HttpResponse.hpp"
 namespace yb

@@ -1,7 +1,9 @@
-#include "logging.hpp"
-#include "Thread.hpp"
-#include"logstream.hpp"
+#include "../../include/logging.hpp"
+#include"../../include/logstream.hpp"
+#include <thread>
 #include <errno.h>
+#include <sys/types.h>
+
 using namespace yb;
 static logger::loglevel loglev=lev::TRACE;
 __thread char errbuf[512];
@@ -36,7 +38,7 @@ logger::logger(sourcefile file_, int line_, const char *func_, int logerrno, log
     setLogLevel(level_);
     formatTime();
     Showerr(errno,func);
-    streams << (tid ? tid : (tid = getid())) << " " << LogLevelStr[level] << " ";
+    streams << (tid ? tid : (tid = gepid())) << " " << LogLevelStr[level] << " ";
     streams << strerror_mr(errnos) << yb::endl;
 }
 logger::~logger()

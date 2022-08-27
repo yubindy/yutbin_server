@@ -1,4 +1,4 @@
-#include "logstream.hpp"
+#include "../../include/logstream.hpp"
 using namespace yb;
 logstream &endl(logstream &stream)
 {

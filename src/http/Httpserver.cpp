@@ -1,6 +1,5 @@
-#include "Httpserver.hpp"
-#include "asynclogging.hpp"
-#include <stat.h>
+#include "../../include/Httpserver.hpp"
+#include "../../include/asynclogging.hpp"
 using namespace yb;
 using namespace yb::http;
 void HttpServer::Messageback(const Tcpconptr &conn, netbuffer *buf)

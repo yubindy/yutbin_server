@@ -1,6 +1,5 @@
 #ifndef INETADDRESS_H
 #define INETADDRESS_H
-#include "Socket.hpp"
 #include <string>
 #include <netinet/in.h>
 namespace yb
